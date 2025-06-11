@@ -176,14 +176,21 @@
 document.getElementById("enviarWhatsApp").onclick = function() {
     const id_cliente = 58;
     const nombre = "rene";
-    const telefono = "7122061824";
+    const telefono = document.getElementById("TelefonoC").value;
 
-    const mensaje = `Último registro:\nID Cliente: ${id_cliente}\nNombre: ${nombre}\nTeléfono: ${telefono}`;
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(mensaje)}`;
+    if (!telefono) {
+        alert("Por favor, ingresa un número de teléfono.");
+        return;
+    }
 
-    window.open(whatsappUrl, "_blank");
+    const mensaje = `Registro de cliente:\nID Cliente: ${id_cliente}\nNombre: ${nombre}\nTeléfono: ${telefono}`;
+    const whatsappWebUrl = `https://web.whatsapp.com/send?text=${encodeURIComponent(mensaje)}`;
+
+    window.open(whatsappWebUrl, "_blank");
 };
+
 </script>
+
                 <div class="col-12">
                                         <!-- Formulario eliminar -->
                     <div class="container-fluid py-5" id="FormularioEliminarCliente" style="display: none;">
