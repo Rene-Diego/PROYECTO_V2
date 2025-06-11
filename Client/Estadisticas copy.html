@@ -63,7 +63,7 @@
 
 
 
-     <!-- Navbar Start -->
+      <!-- Navbar Start -->
     <div class="container-fluid position-relative nav-bar p-0">
         <div class="position-relative px-lg-5" style="z-index: 9;">
             <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
@@ -79,7 +79,8 @@
                     <div class="navbar-nav ml-auto py-0">
 
                         <a href="Principal copy.html" class="nav-item nav-link ">Inicio</a>
-                        <a href="Cliente copy.html" class="nav-item nav-link ">Cliente</a>
+                        <a href="Cliente copy.html" class="nav-item nav-link">Cliente</a>
+                        <a href="Usuarios copy.html" class="nav-item nav-link">Usuarios</a>
                         <a href="Estadisticas copy.html" class="nav-item nav-link active">Estadisticas</a>
                         <a href="servicios copy.html" class="nav-item nav-link">Servicios</a>
                         <a href="index.html" class="nav-item nav-link">Cerrar sesión</a>      
@@ -548,145 +549,192 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 
  <script>
-        async function generatePDFTabla() {
-            try {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF({ orientation: 'landscape' });
+       async function generatePDFTabla() {
+    try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ orientation: 'landscape' });
+        doc.setFont("times"); // Establecer Times New Roman como fuente
 
-                const pagosResponse = await fetch('http://18.117.135.191:9090/pago/');
-                const pagosData = await pagosResponse.json();
+        // Cargar imagen y agregarla en la esquina superior izquierda
+        const img = new Image();
+        img.src = "img/Luigi.png";
+        img.onload = function() {
+            doc.addImage(img, "PNG", 10, 10, 30, 30); // Imagen en la esquina superior izquierda
+            
+            // Centrar título principal
+            doc.setFontSize(18);
+            doc.text("ESTACIONAMIENTO LUIGI", doc.internal.pageSize.width / 2, 20, { align: "center" });
 
-                const serviciosResponse = await fetch('http://18.117.135.191:9090/servicio/');
-                const serviciosData = await serviciosResponse.json();
+            // Centrar subtítulo
+            doc.setFontSize(14);
+            doc.text("\"El lugar más seguro donde dejar tu auto\"", doc.internal.pageSize.width / 2, 30, { align: "center" });
 
-                const serviciosMap = new Map();
-                serviciosData.forEach(servicio => {
-                    serviciosMap.set(servicio.id_Estacionamiento, servicio);
-                });
+            // Centrar nuevo subtítulo
+            doc.setFontSize(16);
+            doc.text("Reporte general de Entradas y Egresos", doc.internal.pageSize.width / 2, 50, { align: "center" });
 
-                let totalRegistros = pagosData.length;
-                let totalCantidad = pagosData.reduce((sum, item) => sum + parseFloat(item.cantidad || 0), 0).toFixed(2);
-               
-                doc.setFontSize(18);
-                doc.setTextColor(0, 0, 128);
-                doc.text('Reporte de Entradas y Egresos', 120, 20, );
+            generateData(doc); // Llamar función para agregar datos después de la imagen
+        };
+    } catch (error) {
+        console.error("Error al generar el PDF:", error);
+    }
+}
 
-                
-                doc.text(`Total Registros: ${totalRegistros}`, 14, 20);
-                doc.text(`Total Cantidad: ${totalCantidad}`, 14, 30);
+async function generateData(doc) {
+    try {
+        const pagosResponse = await fetch('http://18.117.135.191:9090/pago/');
+        const pagosData = await pagosResponse.json();
 
-                let headers = [
-                    ['ID Pago', 'ID Estacionamiento', 'Cantidad', 'Tipo Pago', 
-                     'ID Auto', 'ID Cajón', 'Fecha', 'Hora Entrada', 'Hora Salida']
-                ];
-                
-                let rows = pagosData.map(pago => {
-                    let servicio = serviciosMap.get(pago.id_Estacionamiento) || {};
+        const serviciosResponse = await fetch('http://18.117.135.191:9090/servicio/');
+        const serviciosData = await serviciosResponse.json();
 
-                    return [
-                        pago.id_pago, 
-                        pago.id_Estacionamiento, 
-                        pago.cantidad, 
-                        pago.Tipo_Pago, 
-                        servicio.id_Auto || 'N/A', 
-                        servicio.id_Cajon || 'N/A', 
-                        servicio.Fecha || 'N/A', 
-                        servicio.Hora_Entrada || 'N/A', 
-                        servicio.Hora_Salida || 'N/A'
-                    ];
-                });
+        const serviciosMap = new Map();
+        serviciosData.forEach(servicio => {
+            serviciosMap.set(servicio.id_Estacionamiento, servicio);
+        });
 
-                doc.autoTable({
-                    startY: 40,
-                    head: headers,
-                    body: rows,
-                    theme: 'grid',
-                    styles: { 
-                        cellPadding: 5,
-                        lineWidth: 0.5,
-                        lineColor: [255, 165, 0] // Bordes anaranjados
-                    },
-                    headStyles: { 
-                        fillColor: [255, 255, 255], 
-                        textColor: [0, 0, 0], 
-                        lineColor: [255, 165, 0], 
-                        lineWidth: 0.5 
-                    },
-                    bodyStyles: { 
-                        fillColor: [255, 255, 255], 
-                        textColor: [0, 0, 0], 
-                        lineColor: [255, 165, 0], 
-                        lineWidth: 0.5 
-                    }
-                });
+        let totalRegistros = pagosData.length;
+        let totalCantidad = pagosData.reduce((sum, item) => sum + parseFloat(item.cantidad || 0), 0).toFixed(2);
 
-                doc.save('Pagos_Servicios.pdf');
+        // Agregar estadísticas básicas
+        doc.setFontSize(14);
+        doc.text(`Total Registros: ${totalRegistros}`, 14, 70);
+        doc.text(`Total Cantidad: ${totalCantidad} MXN`, 14, 80);
 
-            } catch (error) {
-                console.error('Error al generar el PDF:', error);
+        let headers = [
+            ["ID Pago", "ID Estacionamiento", "Cantidad", "Tipo Pago", "ID Auto", "ID Cajón", "Fecha", "Hora Entrada", "Hora Salida"]
+        ];
+
+        let rows = pagosData.map(pago => {
+            let servicio = serviciosMap.get(pago.id_Estacionamiento) || {};
+
+            return [
+                pago.id_pago, 
+                pago.id_Estacionamiento, 
+                pago.cantidad, 
+                pago.Tipo_Pago, 
+                servicio.id_Auto || "N/A", 
+                servicio.id_Cajon || "N/A", 
+                servicio.Fecha || "N/A", 
+                servicio.Hora_Entrada || "N/A", 
+                servicio.Hora_Salida || "N/A"
+            ];
+        });
+
+        // Agregar tabla
+        doc.autoTable({
+            startY: 90,
+            head: headers,
+            body: rows,
+            theme: "grid",
+            styles: { 
+                cellPadding: 5,
+                lineWidth: 0.5,
+                lineColor: [255, 165, 0] // Bordes anaranjados
+            },
+            headStyles: { 
+                fillColor: [255, 255, 255], 
+                textColor: [0, 0, 0], 
+                lineColor: [255, 165, 0], 
+                lineWidth: 0.5 
+            },
+            bodyStyles: { 
+                fillColor: [255, 255, 255], 
+                textColor: [0, 0, 0], 
+                lineColor: [255, 165, 0], 
+                lineWidth: 0.5 
             }
-        }
+        });
+
+        // Guardar el PDF
+        doc.save("Reporte general de Entradas y Egresos.pdf");
+    } catch (error) {
+        console.error("Error al generar datos:", error);
+    }
+}
     </script>
         
     <script>
         document.getElementById("generarPdf").addEventListener("click", function() {
-            setTimeout(() => {
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF();
-                let yOffset = 10; 
-                let xOffset = 10; 
+    setTimeout(() => {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+        pdf.setFont("times"); // Establecer Times New Roman como fuente
+        pdf.setFontSize(18);
 
-                const graficas = [
-                    { id: "graficoPagos", titulo: "Distribución de Pagos", descripcion: "Métodos de pago utilizados." },
-                    { id: "graficoPagosHoras", titulo: "Pagos por Hora", descripcion: "Horario con más transacciones." },
-                    { id: "graficoDispersion", titulo: "Dispersión de Pagos", descripcion: "Relación entre monto y hora." },
-                    { id: "graficoDuracion", titulo: "Duración de Estacionamiento", descripcion: "Tiempo de permanencia en cada cajón." },
-                    { id: "graficoFluctuacion", titulo: "Fluctuación de Entradas y Salidas", descripcion: "Horas de mayor ingreso y salida." },
-                    { id: "graficoCajones", titulo: "Uso de Cajones", descripcion: "Cajones más utilizados." }
-                ];
+        // Cargar imagen
+        const img = new Image();
+        img.src = "img/Luigi.png";
+        img.onload = function() {
+            pdf.addImage(img, "PNG", 10, 10, 30, 30); // Imagen en la esquina superior izquierda
 
-                function agregarImagen(canvas, titulo, descripcion, callback) {
-                    html2canvas(canvas).then(canvasImg => {
-                        const imgData = canvasImg.toDataURL("image/png");
+            // Centrar título principal
+            pdf.text("ESTACIONAMIENTO LUIGI", pdf.internal.pageSize.width / 2, 20, { align: "center" });
 
-                        if (xOffset > 100) {
-                            xOffset = 10;
-                            yOffset += 70;
-                        }
+            // Centrar subtítulo
+            pdf.setFontSize(14);
+            pdf.text("\"El lugar más seguro donde dejar tu auto\"", pdf.internal.pageSize.width / 2, 30, { align: "center" });
 
-                        pdf.text(titulo, xOffset, yOffset);
-                        pdf.addImage(imgData, "PNG", xOffset, yOffset + 10, 80, 50);
-                        pdf.text(descripcion, xOffset + 85, yOffset + 35); // Mueve la descripción al lado derecho de la imagen
-                        
-                        xOffset += 100;
-                        callback();
-                    });
-                }
+            // Centrar título de reporte
+            pdf.setFontSize(16);
+            pdf.text("Reporte de estadísticas gráficas", pdf.internal.pageSize.width / 2, 50, { align: "center" });
 
-                function procesarGraficas(index) {
-                    if (index >= graficas.length) {
-                        pdf.save("Reporte_Graficas.pdf");
-                        return;
-                    }
+            let yOffset = 70; 
+            let xOffset = 10; 
 
-                    if (index === 3) { 
-                        pdf.addPage(); // Agregar segunda hoja después de los primeros tres gráficos
-                        yOffset = 10; 
+            const graficas = [
+                { id: "graficoPagos", titulo: "Distribución de Pagos", descripcion: "Métodos de pago utilizados." },
+                { id: "graficoPagosHoras", titulo: "Pagos por Hora", descripcion: "Horario con más transacciones." },
+                { id: "graficoDispersion", titulo: "Dispersión de Pagos", descripcion: "Relación entre monto y hora." },
+                { id: "graficoDuracion", titulo: "Duración de Estacionamiento", descripcion: "Tiempo de permanencia en cada cajón." },
+                { id: "graficoFluctuacion", titulo: "Fluctuación de Entradas y Salidas", descripcion: "Horas de mayor ingreso y salida." },
+                { id: "graficoCajones", titulo: "Uso de Cajones", descripcion: "Cajones más utilizados." }
+            ];
+
+            function agregarImagen(canvas, titulo, descripcion, callback) {
+                html2canvas(canvas).then(canvasImg => {
+                    const imgData = canvasImg.toDataURL("image/png");
+
+                    if (xOffset > 100) {
                         xOffset = 10;
+                        yOffset += 70;
                     }
 
-                    const grafica = graficas[index];
-                    const canvas = document.getElementById(grafica.id);
-                    if (canvas) {
-                        agregarImagen(canvas, grafica.titulo, grafica.descripcion, () => procesarGraficas(index + 1));
-                    } else {
-                        procesarGraficas(index + 1);
-                    }
+                    pdf.setFontSize(12);
+                    pdf.text(titulo, xOffset, yOffset);
+                    pdf.addImage(imgData, "PNG", xOffset, yOffset + 10, 80, 50);
+                    pdf.text(descripcion, xOffset + 85, yOffset + 35);
+
+                    xOffset += 100;
+                    callback();
+                });
+            }
+
+            function procesarGraficas(index) {
+                if (index >= graficas.length) {
+                    pdf.save("Reporte de estadísticas gráficas.pdf");
+                    return;
                 }
 
-                procesarGraficas(0);
-            }, 500);
-        });
+                if (index === 3) { 
+                    pdf.addPage(); 
+                    yOffset = 20; 
+                    xOffset = 10;
+                }
+
+                const grafica = graficas[index];
+                const canvas = document.getElementById(grafica.id);
+                if (canvas) {
+                    agregarImagen(canvas, grafica.titulo, grafica.descripcion, () => procesarGraficas(index + 1));
+                } else {
+                    procesarGraficas(index + 1);
+                }
+            }
+
+            procesarGraficas(0);
+        };
+    }, 500);
+});
     </script>
 
     <!-- Contenedores de las gráficas -->
