@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+        #graficoPagos {
+            max-width: 400px; /* Tamaño pequeño */
+            max-height: 300px; /* Tamaño pequeño */
+        }
+           #graficoPagosHoras {
+            max-width: 400px;
+            max-height: 300px;
+        }
+         #graficoDispersion {
+            max-width: 400px;
+            max-height: 300px;
+        }
+         #graficoDuracion {
+            max-width: 500px;
+            max-height: 350px;
+        }
+          #graficoFluctuacion {
+            max-width: 500px;
+            max-height: 350px;
+        }
+          #graficoCajones {
+            max-width: 400px;
+            max-height: 300px;
+        }
+
+
+    </style>
+
+    <meta charset="utf-8">
+    <title>Estadisticas</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rubik&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+
+   <!-- Navbar Start -->
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="position-relative px-lg-5" style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="" class="navbar-brand">
+                    <h1 class="text-uppercase text-primary mb-1">Estacionamiento Luigi</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+
+                        <a href="Principal copy.html" class="nav-item nav-link ">Inicio</a>
+                        <a href="Cliente copy.html" class="nav-item nav-link ">Cliente</a>
+                        <a href="Estadisticas copy.html" class="nav-item nav-link active">Estadisticas</a>
+                        <a href="servicios copy.html" class="nav-item nav-link">Servicios</a>
+                        <a href="index.html" class="nav-item nav-link">Cerrar sesión</a>      
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+    
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header">
+        <h1 class="display-3 text-uppercase text-white mb-3">Estadisticas</h1>
+        <div class="d-inline-flex text-white">
+            <h6 class="text-uppercase m-0"><a class="text-white" href="">Inicio</a></h6>
+            <h6 class="text-body m-0 px-3">/</h6>
+            <h6 class="text-uppercase text-body m-0">Estadisticas</h6>
+        </div>
+    </div>
+    <!-- Page Header Start -->
+
+
+    <!-- Rent A Car Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-4 text-uppercase text-center mb-5">Graficas de los datos </h1>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="rent-item mb-4">
+                         <a  href="">CANTIDAD DE TIPOS DE PAGOS </a>
+                        
+    <canvas id="graficoPagos"></canvas> <!-- Contenedor para la gráfica -->
+
+    <script>
+        function generarGrafica() {
+            fetch("http://localhost:9090/pago")
+                .then(response => response.json())
+                .then(data => {
+                    let conteoPagos = { Efectivo: 0, Tarjeta: 0, Transferencia: 0 };
+
+                    data.forEach(pago => {
+                        if (pago.Tipo_Pago in conteoPagos) {
+                            conteoPagos[pago.Tipo_Pago]++;
+                        }
+                    });
+
+                    // Crear la gráfica con Chart.js
+                    const ctx = document.getElementById("graficoPagos").getContext("2d");
+                    if (window.miGrafico) {
+                        window.miGrafico.destroy(); // Destruir gráfica anterior antes de actualizar
+                    }
+                    window.miGrafico = new Chart(ctx, {
+                        type: "bar",
+                        data: {
+                            labels: Object.keys(conteoPagos),
+                            datasets: [{
+                                label: "Cantidad de pagos",
+                                data: Object.values(conteoPagos),
+                                backgroundColor: ["#FF5733", "#33A1FF", "#33FF57"],
+                                borderColor: ["#C70039", "#1261A0", "#0D7A2D"],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: false, // Evita cambios automáticos de tamaño
+                            maintainAspectRatio: false
+                        }
+                    });
+                })
+                .catch(error => console.error("Error al obtener los datos de pago:", error));
+        }
+
+        // Generar la gráfica automáticamente al recargar la página
+        document.addEventListener("DOMContentLoaded", generarGrafica);
+
+        // Permitir actualización al hacer clic en el botón
+        document.getElementById("actualizarDatos").addEventListener("click", generarGrafica);
+    </script>
+               
+                      
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="rent-item  mb-4">
+                        <a  href="">PAGOS POR HORA</a>
+                       
+                            <canvas id="graficoPagosHoras"></canvas> <!-- Contenedor para la gráfica -->
+
+    <script>
+        function generarGraficaPagosHoras() {
+            fetch("http://localhost:9090/pago")
+                .then(response => response.json())
+                .then(data => {
+                    let pagosPorHora = {}; // Objeto para contar pagos por hora
+
+                    data.forEach(pago => {
+                        let hora = pago.Hora.split(":")[0] + (pago.Hora.includes("AM") ? " AM" : " PM"); // Extraer la hora correctamente
+                        pagosPorHora[hora] = (pagosPorHora[hora] || 0) + 1;
+                    });
+
+                    // Ordenar las horas en formato correcto
+                    let etiquetas = Object.keys(pagosPorHora).sort((a, b) => {
+                        let horaA = parseInt(a.split(" ")[0]);
+                        let horaB = parseInt(b.split(" ")[0]);
+                        return horaA - horaB;
+                    });
+
+                    let valores = etiquetas.map(hora => pagosPorHora[hora]);
+
+                    // Crear la gráfica de pastel con identificador único
+                    const ctx = document.getElementById("graficoPagosHoras").getContext("2d");
+                    if (window.miGraficoPagosHoras) {
+                        window.miGraficoPagosHoras.destroy();
+                    }
+                    window.miGraficoPagosHoras = new Chart(ctx, {
+                        type: "pie",
+                        data: {
+                            labels: etiquetas,
+                            datasets: [{
+                                label: "Pagos por hora",
+                                data: valores,
+                                backgroundColor: [
+                                    "#FF5733", "#33A1FF", "#33FF57", "#FFC300", "#C70039",
+                                    "#581845", "#900C3F", "#DAF7A6", "#2E86C1", "#A569BD"
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: false,
+                            maintainAspectRatio: false
+                        }
+                    });
+                })
+                .catch(error => console.error("Error al obtener los datos de pago:", error));
+        }
+
+        // Generar la gráfica automáticamente al recargar la página
+        document.addEventListener("DOMContentLoaded", generarGraficaPagosHoras);
+
+        // Permitir actualización con identificador único
+        document.getElementById("actualizarGraficoPagosHoras").addEventListener("click", generarGraficaPagosHoras);
+    </script>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="rent-item mb-4">
+                        
+                        <a  href="">CANTIDAD DE PAGOS DURANTE EL DIA </a>
+                            <canvas id="graficoDispersion"></canvas> <!-- Contenedor para la gráfica -->
+
+    <script>
+        function generarGraficaDispersion() {
+            fetch("http://localhost:9090/pago")
+                .then(response => response.json())
+                .then(data => {
+                    let puntosPago = []; // Lista de puntos para la gráfica de dispersión
+
+                    data.forEach(pago => {
+                        let hora = parseInt(pago.Hora.split(":")[0]); // Extraer la hora en formato numérico
+                        let cantidad = parseFloat(pago.cantidad); // Convertir cantidad a número
+                        puntosPago.push({ x: hora, y: cantidad }); // Agregar el punto a la lista
+                    });
+
+                    // Crear la gráfica de dispersión con identificador único
+                    const ctx = document.getElementById("graficoDispersion").getContext("2d");
+                    if (window.miGraficoDispersion) {
+                        window.miGraficoDispersion.destroy();
+                    }
+                    window.miGraficoDispersion = new Chart(ctx, {
+                        type: "scatter",
+                        data: {
+                            datasets: [{
+                                label: "Pagos por hora",
+                                data: puntosPago,
+                                backgroundColor: "#33A1FF",
+                                borderColor: "#1261A0",
+                                pointRadius: 5
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                x: {
+                                    type: "linear",
+                                    position: "bottom",
+                                    title: { display: true, text: "Hora del pago" },
+                                    ticks: { stepSize: 1 }
+                                },
+                                y: {
+                                    title: { display: true, text: "Cantidad pagada ($)" }
+                                }
+                            },
+                            responsive: false,
+                            maintainAspectRatio: false
+                        }
+                    });
+                })
+                .catch(error => console.error("Error al obtener los datos de pago:", error));
+        }
+
+        // Generar la gráfica automáticamente al recargar la página
+        document.addEventListener("DOMContentLoaded", generarGraficaDispersion);
+
+        // Permitir actualización con identificador único
+        document.getElementById("actualizarGraficoDispersion").addEventListener("click", generarGraficaDispersion);
+    </script>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="rent-item mb-4">
+                        
+                        <a  href="">DURACION DEL SERVICIO</a>
+                            <canvas id="graficoDuracion"></canvas> <!-- Contenedor para la gráfica -->
+
+    <script>
+        function generarGraficaDuracion() {
+            fetch("http://localhost:9090/servicio/")
+                .then(response => response.json())
+                .then(data => {
+                    let duracionPorCajon = {}; // Almacenar duración por cajón
+
+                    data.forEach(servicio => {
+                        let fechaBase = "2025-06-09"; // Usamos una fecha base
+                        let horaEntrada = new Date(`${fechaBase} ${servicio.Hora_Entrada}`);
+                        let horaSalida = new Date(`${fechaBase} ${servicio.Hora_Salida}`);
+
+                        // Si la hora de salida es antes que la entrada, sumar un día
+                        if (horaSalida < horaEntrada) {
+                            horaSalida.setDate(horaSalida.getDate() + 1);
+                        }
+
+                        let duracion = (horaSalida - horaEntrada) / (1000 * 60); // Convertir duración a minutos
+
+                        duracionPorCajon[servicio.id_Cajon] = duracionPorCajon[servicio.id_Cajon] || 0;
+                        duracionPorCajon[servicio.id_Cajon] += duracion;
+                    });
+
+                    // Obtener etiquetas (id_Cajon) y valores (duración)
+                    let etiquetas = Object.keys(duracionPorCajon);
+                    let valores = Object.values(duracionPorCajon);
+
+                    // Crear la gráfica de barras
+                    const ctx = document.getElementById("graficoDuracion").getContext("2d");
+                    if (window.miGraficoDuracion) {
+                        window.miGraficoDuracion.destroy();
+                    }
+                    window.miGraficoDuracion = new Chart(ctx, {
+                        type: "bar",
+                        data: {
+                            labels: etiquetas,
+                            datasets: [{
+                                label: "Duración de estacionamiento (minutos)",
+                                data: valores,
+                                backgroundColor: "#33A1FF",
+                                borderColor: "#1261A0",
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                x: { title: { display: true, text: "ID Cajón" } },
+                                y: { title: { display: true, text: "Duración (min)" } }
+                            },
+                            responsive: false,
+                            maintainAspectRatio: false
+                        }
+                    });
+                })
+                .catch(error => console.error("Error al obtener los datos de servicio:", error));
+        }
+
+        // Generar la gráfica automáticamente al recargar la página
+        document.addEventListener("DOMContentLoaded", generarGraficaDuracion);
+
+        // Permitir actualización con identificador único
+        document.getElementById("actualizarGraficoDuracion").addEventListener("click", generarGraficaDuracion);
+    </script>
+   
+ 
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="rent-item mb-4">
+                         <a  href="">ENTRADA Y SALIDA POR HORA</a>
+                           <canvas id="graficoFluctuacion"></canvas> <!-- Contenedor para la gráfica -->
+
+    <script>
+        function generarGraficaFluctuacion() {
+            fetch("http://localhost:9090/servicio/")
+                .then(response => response.json())
+                .then(data => {
+                    let entradasPorHora = {}; // Cantidad de entradas por hora
+                    let salidasPorHora = {}; // Cantidad de salidas por hora
+
+                    data.forEach(servicio => {
+                        let fechaBase = new Date(servicio.Fecha);
+                        let horaEntrada = new Date(`${servicio.Fecha} ${servicio.Hora_Entrada}`);
+                        let horaSalida = new Date(`${servicio.Fecha} ${servicio.Hora_Salida}`);
+
+                        // Si la salida ocurre después de medianoche, ajustar al siguiente día
+                        if (horaSalida < horaEntrada) {
+                            horaSalida.setDate(horaSalida.getDate() + 1);
+                        }
+
+                        let horaEntradaFormato = `${horaEntrada.getHours()}:00`;
+                        let horaSalidaFormato = `${horaSalida.getHours()}:00`;
+
+                        entradasPorHora[horaEntradaFormato] = (entradasPorHora[horaEntradaFormato] || 0) + 1;
+                        salidasPorHora[horaSalidaFormato] = (salidasPorHora[horaSalidaFormato] || 0) + 1;
+                    });
+
+                    // Obtener todas las horas registradas y ordenarlas
+                    let etiquetas = [...new Set([...Object.keys(entradasPorHora), ...Object.keys(salidasPorHora)])]
+                        .sort((a, b) => parseInt(a) - parseInt(b));
+
+                    let valoresEntradas = etiquetas.map(hora => entradasPorHora[hora] || 0);
+                    let valoresSalidas = etiquetas.map(hora => salidasPorHora[hora] || 0);
+
+                    // Crear la gráfica de líneas
+                    const ctx = document.getElementById("graficoFluctuacion").getContext("2d");
+                    if (window.miGraficoFluctuacion) {
+                        window.miGraficoFluctuacion.destroy();
+                    }
+                    window.miGraficoFluctuacion = new Chart(ctx, {
+                        type: "line",
+                        data: {
+                            labels: etiquetas,
+                            datasets: [
+                                {
+                                    label: "Entradas por hora",
+                                    data: valoresEntradas,
+                                    borderColor: "#33A1FF",
+                                    backgroundColor: "rgba(51, 161, 255, 0.2)",
+                                    fill: true
+                                },
+                                {
+                                    label: "Salidas por hora",
+                                    data: valoresSalidas,
+                                    borderColor: "#FF5733",
+                                    backgroundColor: "rgba(255, 87, 51, 0.2)",
+                                    fill: true
+                                }
+                            ]
+                        },
+                        options: {
+                            scales: {
+                                x: { title: { display: true, text: "Hora" } },
+                                y: { title: { display: true, text: "Cantidad de vehículos" } }
+                            },
+                            responsive: false,
+                            maintainAspectRatio: false
+                        }
+                    });
+                })
+                .catch(error => console.error("Error al obtener los datos de servicio:", error));
+        }
+
+        // Generar la gráfica automáticamente al recargar la página
+        document.addEventListener("DOMContentLoaded", generarGraficaFluctuacion);
+
+        // Permitir actualización con identificador único
+        document.getElementById("actualizarGraficoFluctuacion").addEventListener("click", generarGraficaFluctuacion);
+    </script>
+                     
+                       
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-2">
+                    <div class="rent-item mb-4">
+                        <a  href="">USO DE CAJONES </a>
+                         <canvas id="graficoCajones"></canvas> <!-- Contenedor para la gráfica -->
+
+    <script>
+        function generarGraficaCajones() {
+            fetch("http://localhost:9090/servicio/")
+                .then(response => response.json())
+                .then(data => {
+                    let usoCajones = {}; // Objeto para contar el uso de cada cajón
+
+                    data.forEach(servicio => {
+                        let idCajon = servicio.id_Cajon;
+                        usoCajones[idCajon] = (usoCajones[idCajon] || 0) + 1; // Contar cuántas veces se ha usado cada cajón
+                    });
+
+                    // Obtener etiquetas (id_Cajon) y valores (uso)
+                    let etiquetas = Object.keys(usoCajones);
+                    let valores = Object.values(usoCajones);
+
+                    // Crear la gráfica de pastel con identificador único
+                    const ctx = document.getElementById("graficoCajones").getContext("2d");
+                    if (window.miGraficoCajones) {
+                        window.miGraficoCajones.destroy();
+                    }
+                    window.miGraficoCajones = new Chart(ctx, {
+                        type: "pie",
+                        data: {
+                            labels: etiquetas.map(cajon => `Cajón ${cajon}`),
+                            datasets: [{
+                                label: "Cantidad de usos",
+                                data: valores,
+                                backgroundColor: [
+                                    "#FF5733", "#33A1FF", "#33FF57", "#FFC300", "#C70039",
+                                    "#581845", "#900C3F", "#DAF7A6", "#2E86C1", "#A569BD"
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: false,
+                            maintainAspectRatio: false
+                        }
+                    });
+                })
+                .catch(error => console.error("Error al obtener los datos de servicio:", error));
+        }
+
+        // Generar la gráfica automáticamente al recargar la página
+        document.addEventListener("DOMContentLoaded", generarGraficaCajones);
+
+        // Permitir actualización con identificador único
+        document.getElementById("actualizarGraficoCajones").addEventListener("click", generarGraficaCajones);
+    </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Rent A Car End -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+
+    <!-- Banner Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row mx-0">
+                <div class="col-lg-6 px-0">
+                    <div class="px-5 bg-secondary d-flex align-items-center justify-content-between" style="height: 350px;">
+                        <img class="img-fluid flex-shrink-0 ml-n5 w-50 mr-4" src="img/banner-left.png" alt="">
+                        <div class="text-right">
+                            <h3 class="text-uppercase text-light mb-3">Reporte de Estadisticas</h3>
+                            <p class="mb-4">Graficas</p>
+                             <button class="btn btn-primary px-5 mt-4" id="generarPdf">Generar Reporte</button>
+                        </div>
+                    </div>
+
+                    
+                </div>
+                <div class="col-lg-6 px-0">
+                    <div class="px-5 bg-dark d-flex align-items-center justify-content-between" style="height: 350px;">
+                        <div class="text-left">
+                            <h3 class="text-uppercase text-light mb-3">Reporte de General</h3>
+                            <p class="mb-4">Tabla</p>
+                            <!-- Banner End -->
+           <button class="btn btn-primary px-5 mt-4" onclick="generatePDFTabla()" id="generarPdfTabla">Generar Reporte</button>
+                        </div>
+                        <img class="img-fluid flex-shrink-0 mr-n5 w-50 ml-4" src="img/banner-right.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+
+        <script>
+        async function generatePDFTabla() {
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF({ orientation: 'landscape' });
+
+                const pagosResponse = await fetch('http://localhost:9090/pago/');
+                const pagosData = await pagosResponse.json();
+
+                const serviciosResponse = await fetch('http://localhost:9090/servicio/');
+                const serviciosData = await serviciosResponse.json();
+
+                const serviciosMap = new Map();
+                serviciosData.forEach(servicio => {
+                    serviciosMap.set(servicio.id_Estacionamiento, servicio);
+                });
+
+                let totalRegistros = pagosData.length;
+                let totalCantidad = pagosData.reduce((sum, item) => sum + parseFloat(item.cantidad || 0), 0).toFixed(2);
+               
+                doc.setFontSize(18);
+                doc.setTextColor(0, 0, 128);
+                doc.text('Reporte de Entradas y Egresos', 120, 20, );
+
+                
+                doc.text(`Total Registros: ${totalRegistros}`, 14, 20);
+                doc.text(`Total Cantidad: ${totalCantidad}`, 14, 30);
+
+                let headers = [
+                    ['ID Pago', 'ID Estacionamiento', 'Cantidad', 'Tipo Pago', 
+                     'ID Auto', 'ID Cajón', 'Hora Entrada', 'Hora Salida']
+                ];
+                
+                let rows = pagosData.map(pago => {
+                    let servicio = serviciosMap.get(pago.id_Estacionamiento) || {};
+
+                    return [
+                        pago.id_pago, 
+                        pago.id_Estacionamiento, 
+                        pago.cantidad, 
+                        pago.Tipo_Pago, 
+                        servicio.id_Auto || 'N/A', 
+                        servicio.id_Cajon || 'N/A', 
+                        servicio.Hora_Entrada || 'N/A', 
+                        servicio.Hora_Salida || 'N/A'
+                    ];
+                });
+
+                doc.autoTable({
+                    startY: 40,
+                    head: headers,
+                    body: rows,
+                    theme: 'grid',
+                    styles: { 
+                        cellPadding: 5,
+                        lineWidth: 0.5,
+                        lineColor: [255, 165, 0] // Bordes anaranjados
+                    },
+                    headStyles: { 
+                        fillColor: [255, 255, 255], 
+                        textColor: [0, 0, 0], 
+                        lineColor: [255, 165, 0], 
+                        lineWidth: 0.5 
+                    },
+                    bodyStyles: { 
+                        fillColor: [255, 255, 255], 
+                        textColor: [0, 0, 0], 
+                        lineColor: [255, 165, 0], 
+                        lineWidth: 0.5 
+                    }
+                });
+
+                doc.save('Pagos_Servicios.pdf');
+
+            } catch (error) {
+                console.error('Error al generar el PDF:', error);
+            }
+        }
+    </script>
+        
+    <script>
+        document.getElementById("generarPdf").addEventListener("click", function() {
+            setTimeout(() => {
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF();
+                let yOffset = 10; 
+                let xOffset = 10; 
+
+                const graficas = [
+                    { id: "graficoPagos", titulo: "Distribución de Pagos", descripcion: "Métodos de pago utilizados." },
+                    { id: "graficoPagosHoras", titulo: "Pagos por Hora", descripcion: "Horario con más transacciones." },
+                    { id: "graficoDispersion", titulo: "Dispersión de Pagos", descripcion: "Relación entre monto y hora." },
+                    { id: "graficoDuracion", titulo: "Duración de Estacionamiento", descripcion: "Tiempo de permanencia en cada cajón." },
+                    { id: "graficoFluctuacion", titulo: "Fluctuación de Entradas y Salidas", descripcion: "Horas de mayor ingreso y salida." },
+                    { id: "graficoCajones", titulo: "Uso de Cajones", descripcion: "Cajones más utilizados." }
+                ];
+
+                function agregarImagen(canvas, titulo, descripcion, callback) {
+                    html2canvas(canvas).then(canvasImg => {
+                        const imgData = canvasImg.toDataURL("image/png");
+
+                        if (xOffset > 100) {
+                            xOffset = 10;
+                            yOffset += 70;
+                        }
+
+                        pdf.text(titulo, xOffset, yOffset);
+                        pdf.addImage(imgData, "PNG", xOffset, yOffset + 10, 80, 50);
+                        pdf.text(descripcion, xOffset + 85, yOffset + 35); // Mueve la descripción al lado derecho de la imagen
+                        
+                        xOffset += 100;
+                        callback();
+                    });
+                }
+
+                function procesarGraficas(index) {
+                    if (index >= graficas.length) {
+                        pdf.save("Reporte_Graficas.pdf");
+                        return;
+                    }
+
+                    if (index === 3) { 
+                        pdf.addPage(); // Agregar segunda hoja después de los primeros tres gráficos
+                        yOffset = 10; 
+                        xOffset = 10;
+                    }
+
+                    const grafica = graficas[index];
+                    const canvas = document.getElementById(grafica.id);
+                    if (canvas) {
+                        agregarImagen(canvas, grafica.titulo, grafica.descripcion, () => procesarGraficas(index + 1));
+                    } else {
+                        procesarGraficas(index + 1);
+                    }
+                }
+
+                procesarGraficas(0);
+            }, 500);
+        });
+    </script>
+
+    <!-- Contenedores de las gráficas -->
+    
+
+    <!-- Vendor Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="owl-carousel vendor-carousel">
+                <div class="bg-light p-4">
+                    <img src="img/vendor-1.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-2.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-3.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-4.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-5.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-6.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-7.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-8.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vendor End -->
+
+
+ 
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

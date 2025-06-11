@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>ROYAL CARS - Car Rental HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rubik&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<style>
+    input.form-control,
+    select.custom-select {
+        color: rgb(255, 255, 255);
+    }
+
+    ::placeholder { /* Para los placeholders */
+        color: rgba(255, 255, 255, 0.834);
+    }
+
+    select option {
+        color: black; /* Esto es necesario si usas fondo transparente para los <option> */
+    }
+</style>
+
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="position-relative px-lg-5" style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="" class="navbar-brand">
+                    <h1 class="text-uppercase text-primary mb-1">Estacionamiento Luigi</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+
+                        <a href="Principal.html" class="nav-item nav-link active">Inicio</a>
+                        <a href="Cliente.html" class="nav-item nav-link">Cliente</a>
+                        <a href="Usuarios.html" class="nav-item nav-link">Usuarios</a>
+                        <a href="Estadisticas.html" class="nav-item nav-link">Estadisticas</a>
+                        <a href="servicios.html" class="nav-item nav-link">Servicios</a>
+                        <a href="index.html" class="nav-item nav-link">Cerrar sesión</a>      
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+
+
+   <!-- opciones Start -->
+
+
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="bg-banner row mx-0 ">
+
+            <!-- Columna Izquierda: Botones -->
+            <div class="col-lg-4 mb-5">
+                <div class="bg-secondary p-5">
+                    <h3 class="text-primary text-center mb-4">OPCIONES</h3>
+
+                    <!-- Botón principal -->
+                    <div class="form-group">
+                        <button id="btnRegistrarEntrada" class="btn btn-primary btn-block" type="button" style="height: 50px;">
+                            Registrar Entrada
+                        </button>
+                    </div>
+
+                    <!-- Botones que se mostrarán/ocultarán -->
+                    <div id="botonesEntrada" class="d-none">
+                        <div class="form-group">
+                            <button id="btnNuevoCliente" class="btn btn-primary btn-block" type="button" style="height: 50px;">
+                                Cliente no Registrado
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <button id="btnClienteRegistrado" class="btn btn-primary btn-block" type="button" style="height: 50px;">
+                                Cliente registrado
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Botón de pagos -->
+                    <div class="form-group">
+                        <button id="btnPagos" class="btn btn-primary btn-block" type="button" style="height: 50px;">
+                            Pagos
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Formularios -->
+            <div class="col-lg-8 mb-5">
+                <div id="contenedorFormularios" class="bg-secondary p-5">
+
+                    <!-- Mensaje inicial -->
+                    <div id="mensajeInicial">
+                        <h3 class="text-primary text-center mb-4">"Tu auto seguro, siempre cerca."</h3>
+                        <h3 class="text-primary text-center mb-4">Estaciona con la confianza de dejarlo en buenas manos.</h3>
+                        <img class="w-75 mb-4" src="img/about.png" alt="Descripción de la imagen" style="display: block; margin: auto;">
+                    </div>
+         
+
+                    <!-- Formulario Cliente Registrado -->
+                    <div id="formClienteRegistrado" class="d-none">
+                        <h3 class="text-primary text-center mb-4">Entrada de Cliente Registrado</h3>
+                        <div class="form-group">
+                            <label class="text-white">Numero de cliente</label>
+                            
+                            <input type="text" class="form-control bg-transparent border-primary p-4"id="id_ClienteCR" placeholder="No.Cliente " />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-white">Hora de entrada</label>
+                            <div class="time" id="time1" data-target-input="nearest">
+                                <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Presione para obtener hora"
+                                    data-target="#time1" data-toggle="datetimepicker" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-white">Cajón</label>
+                            <select id="cajonSelectCR" class="custom-select px-4" style="height: 50px;">
+                                <option selected disabled>Selecciona un cajón disponible</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-0">
+                            <button class="btn btn-primary btn-block" type="submit"  style="height: 50px;">Registrar</button>
+                        </div>
+                    </div>
+
+
+                    <!-- Formulario Nuevo Cliente -->
+                    <div id="formNuevoCliente" class="d-none">
+                        <h3 class="text-primary text-center mb-4">Entrada de Cliente no registrado</h3>
+                        <div class="form-group">
+                            <label class="text-white">Nombre</label>
+                            <input type="text" class="form-control bg-transparent border-primary p-4" id ="NombreNC" placeholder="Nombre" />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-white">Telefono</label>
+                            <input type="text" class="form-control bg-transparent border-primary p-4" id ="TelefonoNC" placeholder="Telefono" />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-white">Placa del Vehiculo</label>
+                           
+                            <input type="text" class="form-control bg-transparent border-primary p-4" id ="PlacaNC" placeholder="Placa del Vehiculo" />
+                        </div>
+                        <div class="form-group">
+                             <label class="text-white">Marca del Vehiculo</label>
+                            <input type="text" class="form-control bg-transparent border-primary p-4" id ="MarcaNC" placeholder="Marca del Vehiculo" />
+                        </div>
+                        <div class="form-group">
+                             <label class="text-white">Hora de entrada</label>
+                            <div class="time" id="time2" data-target-input="nearest">
+                                <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Presione para obtener hora"
+                                    data-target="#time2" data-toggle="datetimepicker" />
+                            </div>
+                        </div>
+                         <label class="text-white">Cajón</label>
+                        <select id="cajonSelect" class="custom-select px-4" style="height: 50px;">
+    <option selected disabled>Selecciona un cajón disponible</option>
+</select>
+
+                        <div class="form-group mb-0">
+                            <button id="registrarBtn" class="btn btn-primary btn-block" type="button" style="height: 50px;">Registrar</button>
+                        </div>
+                    </div>
+
+                    <!-- Formulario Pago -->
+                    <div id="formPago" class="d-none">
+                        <h3 class="text-primary text-center mb-4">Datos de Pago</h3>
+                        <label class="text-white">Numero de servicio</label>
+                        <div class="form-group d-flex">
+                            
+                            <input type="text" class="form-control bg-transparent border-primary p-4" id="id_Estacionamiento" placeholder="Número de servicio" style="flex: 1; margin-right: 10px;" />
+                            <!-- Botón con onclick -->
+<button class="btn btn-primary" type="submit" style="height: 50px; white-space: nowrap;" onclick="buscarServicio()">Buscar</button>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-white">Numero de cliente</label>
+                            <input type="text" class="form-control bg-transparent border-primary p-4" id="id_cliente" readonly placeholder="Numero de Cliente" />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-white">Numero de Auto</label>
+                            <input type="text" class="form-control bg-transparent border-primary p-4"id="id_Auto" readonly placeholder="id de Auto" />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-white">Hora de entrada</label>
+                            <input type="text" class="form-control bg-transparent border-primary p-4" id="Hora_Entrada" readonly placeholder="Hora de Entrada" />
+                        </div>
+                        <div class="form-group">
+                            <label class="text-white">Hora de Salida</label>
+                            <input type="text" class="form-control bg-transparent border-primary p-4" id="Hora_Salida" readonly placeholder="Hora de Salida" />
+                        </div>
+                        <label class="text-white"style="text-center">Total</label>
+                        <div class="form-group d-flex">
+                            <!-- Botón con onclick para calcular pago -->
+<button class="btn btn-primary btn-block" type="submit" style="height: 50px; margin-right: 10px;" onclick="calcularPago()">Calcular pago</button>
+
+<input type="text" class="form-control bg-transparent border-primary p-4" id="total" readonly placeholder="Total" />
+                        </div>
+
+                       <!-- Botón que abre el modal -->
+<div class="form-group">
+    <button class="btn btn-primary btn-block" type="button" data-bs-toggle="modal" data-bs-target="#modalCobro" style="height: 50px;">
+        Cobrar
+    </button>
+</div>
+    <script>
+        
+        async function consultarYEnviarPago() {
+            const idCliente = document.getElementById("id_cliente").value;
+
+            if (!idCliente) {
+                alert("Por favor, ingrese un ID de cliente.");
+                return;
+            }
+
+            try {
+                //  Consulta los datos del cliente
+                const responseCliente = await fetch(`http://localhost:9090/cliente/${idCliente}`);
+                if (!responseCliente.ok) throw new Error("Error al obtener datos del cliente");
+
+                const clienteData = await responseCliente.json();
+                const numeroDestino = `+52${clienteData.Telefono}`.trim(); // Agrega +52 al número
+
+                if (!numeroDestino) throw new Error("No se encontró un número de teléfono válido");
+
+                //  Consulta los datos del último pago
+                const responsePago = await fetch("http://localhost:9090/pago/");
+                if (!responsePago.ok) throw new Error("Error al obtener datos de pago");
+
+                const pagosData = await responsePago.json();
+
+                if (!pagosData || pagosData.length === 0) {
+                    throw new Error("No hay pagos registrados");
+                }
+
+                const ultimoPago = pagosData[pagosData.length - 1]; // Último registro
+
+                // 3 Generar mensaje con los datos del pago
+                const mensaje = `
+ *Detalles del Pago*:
+- ID Pago: ${ultimoPago.id_pago}
+- ID Estacionamiento: ${ultimoPago.id_Estacionamiento}
+- Cantidad: ${ultimoPago.cantidad} MXN
+- Tipo de Pago: ${ultimoPago.Tipo_Pago}
+- Fecha: ${ultimoPago.Fecha}
+- Hora: ${ultimoPago.Hora}
+                `;
+
+                // Construir el enlace de WhatsApp con el número y mensaje
+                const url = `https://web.whatsapp.com/send?phone=${numeroDestino}&text=${encodeURIComponent(mensaje)}`;
+
+                // Abrir WhatsApp Web con el mensaje predefinido
+                window.open(url, "_blank");
+
+                alert(`Mensaje enviado a WhatsApp con éxito al número ${numeroDestino}`);
+            } catch (error) {
+                console.error("Error:", error);
+                alert(`Hubo un problema al procesar la solicitud. Número destino: ${numeroDestino || "No disponible"}`);
+            }
+        }
+    </script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+///////////////// Entrada Cliente Registrado ////////////////////
+document.querySelector("button[type='submit']").addEventListener("click", async () => {
+    const id_Cliente = document.getElementById("id_ClienteCR").value;
+    const horaEntrada = document.querySelector("input[data-target='#time1']").value;
+    const idCajon = document.getElementById("cajonSelectCR").value;
+
+    if (!id_Cliente || !horaEntrada || !idCajon) {
+        alert("Completa todos los campos.");
+        return;
+    }
+
+    try {
+        // Consulta el servidor para obtener SOLO el id_auto y el teléfono
+        const response = await fetch(`http://localhost:9090/cliente/${id_Cliente}`);
+        if (!response.ok) throw new Error("Error en la consulta");
+
+        const clienteData = await response.json();
+        const idAuto = clienteData.id_Auto; // Extrae solo el id_auto
+        let NumeroTelefono = clienteData.Telefono;
+
+        if (!idAuto || !NumeroTelefono) throw new Error("Datos del cliente incompletos");
+
+        // Asegurar formato correcto del número de teléfono
+        NumeroTelefono = NumeroTelefono.replace(/\s+/g, "").trim(); // Elimina espacios
+        const numeroDestino = `+52${NumeroTelefono}`;
+
+        const fecha = new Date().toISOString().split("T")[0];
+
+        // Envía la solicitud POST con id_auto, id_Cajon, Hora_Entrada y Fecha
+        const postData = {
+            id_Auto: idAuto,
+            id_Cajon: idCajon,
+            Hora_Entrada: horaEntrada,
+            Fecha: fecha
+        };
+
+        const postResponse = await fetch(`http://localhost:9090/servicio/${idAuto}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(postData)
+        });
+
+        if (!postResponse.ok) throw new Error("Error al registrar la entrada");
+
+        alert(`Registro exitoso. Número de contacto: ${numeroDestino}`);
+
+        document.getElementById("id_ClienteCR").value = "";
+        document.querySelector("input[data-target='#time1']").value = "";
+        document.getElementById("cajonSelectCR").value = "";
+
+        // 🔹 Actualizar el estado del cajón a "Ocupado" después del registro exitoso
+        const putResponse = await fetch("http://localhost:9090/cajon/", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id_Cajon: idCajon, Estado: "Ocupado" })
+        });
+
+        if (!putResponse.ok) throw new Error("Error al actualizar el estado del cajón");
+
+        cargarCajonCR();
+        cargarCajon();
+
+        // Ahora, realizar la consulta de servicio y enviar el mensaje de WhatsApp
+        const responseServicio = await fetch("http://localhost:9090/servicio/");
+        if (!responseServicio.ok) throw new Error("Error al obtener los datos");
+
+        const servicioData = await responseServicio.json();
+
+        if (!servicioData || servicioData.length === 0) throw new Error("No hay datos disponibles");
+
+        // Obtener el último registro de servicio
+        const ultimoRegistro = servicioData[servicioData.length - 1];
+
+        // Generar el mensaje con los datos del servicio
+        const mensaje = `
+Detalles del Servicio:
+- Número de Servicio: ${ultimoRegistro.id_Estacionamiento}
+- ID Auto: ${ultimoRegistro.id_Auto}
+- ID Cajón: ${ultimoRegistro.id_Cajon}
+- Hora Entrada: ${ultimoRegistro.Hora_Entrada}
+- Hora Salida: ${ultimoRegistro.Hora_Salida ? ultimoRegistro.Hora_Salida : "No registrado"}
+- Fecha: ${ultimoRegistro.Fecha}
+        `;
+
+        // Construir el enlace de WhatsApp con el número y mensaje
+        const url = `https://web.whatsapp.com/send?phone=${numeroDestino}&text=${encodeURIComponent(mensaje)}`;
+
+        // Abrir WhatsApp Web con el mensaje predefinido
+        window.open(url, "_blank");
+
+        alert(`Mensaje enviado a WhatsApp con éxito al número ${numeroDestino}`);
+    } catch (error) {
+        console.error("Error:", error);
+        alert(`Hubo un problema al procesar la solicitud. Número destino: ${NumeroTelefono ? numeroDestino : "No disponible"}`);
+    }
+});
+</script>
+<script>
+
+
+async function canselarpago(){
+    document.getElementById("id_Estacionamiento").value = "";
+        document.getElementById("id_cliente").value = "";
+        document.getElementById("id_Auto").value ="";
+        document.getElementById("Hora_Entrada").value = "";
+        document.getElementById("Hora_Salida").value = "";
+        document.getElementById("total").value = "";
+}
+
+async function generarPDF() {
+    console.log("Generando PDF...");
+    
+    // Obtener los valores del formulario
+    const id_Estacionamiento = document.getElementById("id_Estacionamiento").value;
+    const cantidad = document.getElementById("total1").value.replace("$", "").trim();
+    const tipoPago = document.getElementById("tipoPago").value;
+    
+    // Obtener fecha y hora actuales
+    const ahora = new Date();
+    const año = ahora.getFullYear();
+    const mes = (ahora.getMonth() + 1).toString().padStart(2, "0");
+    const dia = ahora.getDate().toString().padStart(2, "0");
+
+    let horas = ahora.getHours();
+    const minutos = ahora.getMinutes().toString().padStart(2, "0");
+    const periodo = horas >= 12 ? "PM" : "AM";
+    horas = horas % 12 || 12;
+
+    const fecha = `${año}-${mes}-${dia}`;
+    const hora = `${horas}:${minutos} ${periodo}`;
+
+    // Validar datos antes de generar el PDF
+    if (!id_Estacionamiento || !cantidad || !tipoPago) {
+        alert("Por favor, completa todos los campos antes de imprimir el ticket.");
+        return;
+    }
+
+    // Crear el PDF con jsPDF
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFont("helvetica", "bold");
+    doc.text("Ticket de Pago", 20, 20);
+
+    doc.setFont("helvetica", "normal");
+    doc.text(`Numero de servicio : ${id_Estacionamiento}`, 20, 40);
+    doc.text(`Cantidad: $${cantidad}`, 20, 50);
+    doc.text(`Tipo de Pago: ${tipoPago}`, 20, 60);
+    doc.text(`Fecha: ${fecha}`, 20, 70);
+    doc.text(`Hora: ${hora}`, 20, 80);
+
+    // Descargar el PDF
+    doc.save(`Ticket_Pago_${id_Estacionamiento}.pdf`);
+
+    alert("Ticket generado y descargado correctamente.");
+}
+async function buscarServicio() {
+    // Obtener el ID del estacionamiento ingresado por el usuario
+    const id_Estacionamiento = document.getElementById("id_Estacionamiento").value;
+
+    if (!id_Estacionamiento) {
+        alert("Por favor, ingresa el número de servicio.");
+        return;
+    }
+
+    // Obtener la hora actual del sistema
+    const ahora = new Date();
+    let horas = ahora.getHours();
+    const minutos = ahora.getMinutes().toString().padStart(2, '0');
+    
+    // Determinar AM o PM
+    const periodo = horas >= 12 ? "PM" : "AM";
+    horas = horas % 12 || 12; // Convertir formato 24h a 12h
+
+    const horaActual = `${horas}:${minutos} ${periodo}`;
+
+    try {
+        // Enviar el ID y la hora al servidor con PUT
+        const putResponse = await fetch(`http://localhost:9090/servicio/`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id_Estacionamiento: id_Estacionamiento,
+                Hora_Salida: horaActual
+            })
+        });
+
+        if (!putResponse.ok) {
+            const errorData = await putResponse.json();
+            alert("Error  " );
+            return;
+        }
+
+        // Ahora realizar la búsqueda del servicio
+        const response = await fetch(`http://localhost:9090/servicio/${id_Estacionamiento}`);
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert("Error: " + (data.mensaje || "No se pudo obtener el servicio"));
+            return;
+        }
+
+        // Llenar los campos con los datos obtenidos
+        document.getElementById("id_cliente").value = data.id_cliente || "";
+        document.getElementById("id_Auto").value = data.id_Auto || "";
+        document.getElementById("Hora_Entrada").value = data.Hora_Entrada || "";
+        document.getElementById("Hora_Salida").value = data.Hora_Salida || "";
+        const idCAJON = data.id_Cajon;
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Ocurrió un error al obtener los datos del servicio.");
+    }
+}
+
+//Calcular pago
+
+function calcularPago() {
+    // Obtener los valores de Hora_Entrada y Hora_Salida
+    let horaEntrada = document.getElementById("Hora_Entrada").value;
+    let horaSalida = document.getElementById("Hora_Salida").value;
+
+    if (!horaEntrada || !horaSalida) {
+        alert("Por favor, ingresa la Hora de Entrada y la Hora de Salida.");
+        return;
+    }
+
+    // Extraer solo los números de la hora y convertir a formato de 24 horas
+    horaEntrada = horaEntrada.replace(/AM|PM/g, "").trim();
+    horaSalida = horaSalida.replace(/AM|PM/g, "").trim();
+
+    // Convertir a números
+    let horaEntradaNum = parseInt(horaEntrada.split(":")[0], 10);
+    let minutoEntradaNum = parseInt(horaEntrada.split(":")[1], 10);
+    let horaSalidaNum = parseInt(horaSalida.split(":")[0], 10);
+    let minutoSalidaNum = parseInt(horaSalida.split(":")[1], 10);
+
+    // Calcular la diferencia en minutos
+    let diferenciaMinutos = (horaSalidaNum * 60 + minutoSalidaNum) - (horaEntradaNum * 60 + minutoEntradaNum);
+
+    // Calcular la tarifa
+    let totalPago = diferenciaMinutos > 60 ? 30 : 10;
+
+    // Mostrar el resultado en el campo "Total"
+    document.getElementById("total").value = `$${totalPago}`;
+    document.getElementById("total1").value = `$${totalPago}`;
+
+
+}
+
+///////////////////////////modal 
+    async function confirmarPago() {
+    // Obtener los valores de los campos
+    const id_Estacionamiento = document.getElementById("id_Estacionamiento").value;
+    const cantidad = document.getElementById("total1").value.replace("$", "").trim(); // Elimina el símbolo $
+    const tipoPago = document.getElementById("tipoPago").value;
+
+    // Obtener la fecha y hora actual en formato YYYY-MM-DD y HH:MM AM/PM
+    const ahora = new Date();
+    const año = ahora.getFullYear();
+    const mes = (ahora.getMonth() + 1).toString().padStart(2, "0");
+    const dia = ahora.getDate().toString().padStart(2, "0");
+
+    let horas = ahora.getHours();
+    const minutos = ahora.getMinutes().toString().padStart(2, "0");
+    const periodo = horas >= 12 ? "PM" : "AM";
+    horas = horas % 12 || 12; // Convertir formato 24h a 12h
+
+    const fecha = `${año}-${mes}-${dia}`;
+    const hora = `${horas}:${minutos} ${periodo}`;
+
+    // Validación de datos
+    if (!id_Estacionamiento || !cantidad || !tipoPago) {
+        alert("Por favor, completa todos los campos antes de confirmar el pago.");
+        return;
+    }
+
+    // Datos a enviar
+    const datosPago = {
+        id_Estacionamiento: id_Estacionamiento,
+        cantidad: parseFloat(cantidad), // Convertir cantidad a número
+        Tipo_Pago: tipoPago,
+        Fecha: fecha,
+        Hora: hora
+    };
+
+    try {
+        // Realizar la solicitud POST al servidor
+        const response = await fetch("http://localhost:9090/pago/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(datosPago)
+        });
+
+        const resultado = await response.json();
+
+        if (!response.ok) {
+            alert("Error al procesar el pago: " + (resultado.mensaje || "No se pudo realizar el pago"));
+            return;
+        }
+
+        // Confirmación de éxito
+        alert("Pago registrado correctamente.");
+
+    } catch (error) {
+        console.error("Error al enviar los datos de pago:", error);
+        alert("Ocurrió un error al registrar el pago.");
+    }
+}
+
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- Modal -->
+<div class="modal fade" id="modalCobro" tabindex="-1" aria-labelledby="modalCobroLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCobroLabel">Confirmación de pago</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <h3 class="text-primary text-center mb-4">El pago es de:</h3>
+        <input type="text" class="form-control bg-transparent border-primary p-4" id="total1" readonly placeholder="Total" />
+      </div>
+      <div class="form-group d-flex">
+                            <h3 class="text-primary text-center ">Tipo de pago :</h3>
+                            <select id="tipoPago" class="custom-select px-4" style="height: 50px;">
+    <option value="Efectivo">Efectivo</option>
+    <option value="Tarjeta">Tarjeta</option>
+    <option value="Transferencia">Transferencia</option>
+</select>
+
+                        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="canselarpago()" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal"onclick="confirmarPago(), consultarYEnviarPago(),liberarCajon(),canselarpago()">Confirmar</button>
+<button type="button" class="btn btn-success" data-bs-dismiss="modal"onclick="confirmarPago(),generarPDF(),liberarCajon(),canselarpago()">Confirmar e imprimir ticket</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+                </div>
+            </div>
+            <!-- Columna Derecha End -->
+
+        </div>
+    </div>
+</div>
+<!-- opciones End -->
+<script>
+
+    async function liberarCajon(){
+    try {
+        // Obtener el ID del estacionamiento ingresado por el usuario
+        const id_Estacionamiento = document.getElementById("id_Estacionamiento").value;
+
+        // Realizar la búsqueda del servicio
+        const response = await fetch(`http://localhost:9090/servicio/${id_Estacionamiento}`);
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error("Error: " + (data.mensaje || "No se pudo obtener el servicio"));
+            return;
+        }
+
+        // Obtener el id_Cajon del servicio
+        const id_Cajon = data.id_Cajon;
+
+        // Verificar que id_Cajon tiene un valor válido antes de enviar la solicitud
+        if (!id_Cajon) {
+            console.error("Error: id_Cajon es undefined o null.");
+            return;
+        }
+
+        // 🔹 Actualizar el estado del cajón a "Disponible"
+        const putResponse = await fetch("http://localhost:9090/cajon/", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id_Cajon, Estado: "Disponible" })
+        });
+
+        if (!putResponse.ok) throw new Error("Error al actualizar el estado del cajón");
+
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+    //formulario de cliente registrado 
+        function cargarCajonCR() {
+    fetch("http://localhost:9090/cajon/")
+        .then(response => response.json()) // Convertir la respuesta a JSON
+        .then(data => {
+            var selectCajon = document.getElementById("cajonSelectCR");
+
+            // Limpiar el select antes de agregar nuevos datos
+            selectCajon.innerHTML = '<option selected disabled>Selecciona un cajón disponible</option>';
+
+            // Filtrar los cajones que tienen estado "Disponible"
+            const cajonesDisponibles = data.filter(cajon => cajon.Estado === "Disponible");
+
+            cajonesDisponibles.forEach(cajon => {
+                var option = document.createElement("option");
+                option.value = cajon.id_Cajon;
+                option.textContent = `Cajón ${cajon.id_Cajon} ,${cajon.Tipo}`;
+                selectCajon.appendChild(option);
+            });
+        })
+        .catch(error => console.error("Error al obtener los datos:", error));     
+}
+// Cargar los cajones disponibles cuando se cargue la página
+document.addEventListener("DOMContentLoaded", cargarCajonCR);
+
+//formulario de cliente no registrado
+    function cargarCajon() {
+    fetch("http://localhost:9090/cajon/")
+        .then(response => response.json()) // Convertir la respuesta a JSON
+        .then(data => {
+            var selectCajon = document.getElementById("cajonSelect");
+
+            // Limpiar el select antes de agregar nuevos datos
+            selectCajon.innerHTML = '<option selected disabled>Selecciona un cajón disponible</option>';
+
+            // Filtrar los cajones que tienen estado "Disponible"
+            const cajonesDisponibles = data.filter(cajon => cajon.Estado === "Disponible");
+
+            cajonesDisponibles.forEach(cajon => {
+                var option = document.createElement("option");
+                option.value = cajon.id_Cajon;
+                option.textContent = `Cajón ${cajon.id_Cajon} ,${cajon.Tipo}`;
+                selectCajon.appendChild(option);
+            });
+        })
+        .catch(error => console.error("Error al obtener los datos:", error));     
+}
+
+// Cargar los cajones disponibles cuando se cargue la página
+document.addEventListener("DOMContentLoaded", cargarCajon);
+
+
+document.getElementById("registrarBtn").addEventListener("click", function () {
+    const nombre = document.getElementById("NombreNC").value;
+    const telefono = document.getElementById("TelefonoNC").value.trim(); 
+    const placa = document.getElementById("PlacaNC").value;
+    const marca = document.getElementById("MarcaNC").value;
+    const horaEntrada = document.querySelector("input[data-target='#time2']").value;
+    const id_Cajon = document.getElementById("cajonSelect").value;
+    const fecha = new Date().toISOString().split("T")[0];
+
+    if (!nombre || !placa || !marca || !id_Cajon || !horaEntrada || !fecha || !telefono) {
+        alert("Por favor, completa todos los campos obligatorios.");
+        return;
+    }
+
+    // Validación del teléfono: exactamente 10 dígitos y solo números
+    const regexTelefono = /^\d{10}$/;
+    if (!regexTelefono.test(telefono)) {
+        alert("El número de teléfono debe tener exactamente 10 dígitos y solo números.");
+        return;
+    }
+
+    // Asegurar el formato correcto del número de teléfono con +52
+    const numeroDestino = `+52${telefono}`;
+
+    const datosServicio = {
+        Nombre: nombre,
+        Telefono: telefono,
+        Placa: placa,
+        Marca: marca,
+        id_Cajon: id_Cajon,
+        Hora_Entrada: horaEntrada,
+        Fecha: fecha
+    };
+
+    // Enviar solicitud POST para registrar el servicio
+    fetch("http://localhost:9090/servicio", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(datosServicio)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert("Servicio registrado correctamente.");
+        resetearCasillas();
+
+        return fetch("http://localhost:9090/cajon/", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id_Cajon, Estado: "Ocupado" })
+        });
+    })
+    .then(response => response.json())
+    .then(() => {
+        cargarCajonCR();
+        cargarCajon();
+
+        return fetch("http://localhost:9090/servicio/");
+    })
+    .then(response => response.json())
+    .then(servicioData => {
+        if (!servicioData || servicioData.length === 0) {
+            throw new Error("No hay datos disponibles");
+        }
+
+        const ultimoRegistro = servicioData[servicioData.length - 1];
+
+        const mensaje = `
+Detalles del Servicio:
+- Número de Servicio: ${ultimoRegistro.id_Estacionamiento}
+- ID Auto: ${ultimoRegistro.id_Auto}
+- ID Cajón: ${ultimoRegistro.id_Cajon}
+- Hora Entrada: ${ultimoRegistro.Hora_Entrada}
+- Hora Salida: ${ultimoRegistro.Hora_Salida ? ultimoRegistro.Hora_Salida : "No registrado"}
+- Fecha: ${ultimoRegistro.Fecha}
+        `;
+
+        const url = `https://web.whatsapp.com/send?phone=${numeroDestino}&text=${encodeURIComponent(mensaje)}`;
+
+        window.open(url, "_blank");
+
+        alert(`Mensaje enviado a WhatsApp con éxito al número ${numeroDestino}`);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert(`Hubo un problema al procesar la solicitud. Número destino: ${numeroDestino}`);
+    });
+});
+
+
+
+function resetearCasillas() {
+    document.getElementById("NombreNC").value = "";
+    document.getElementById("TelefonoNC").value = "";
+    document.getElementById("PlacaNC").value = "";
+    document.getElementById("MarcaNC").value = "";
+    document.getElementById("cajonSelect").value = "";
+
+    // Resetea el datetimepicker
+    $('#time2').datetimepicker('clear');
+}
+
+</script>
+
+<!-- JavaScript para controlar visibilidad -->
+<script>
+    const btnRegistrarEntrada = document.getElementById("btnRegistrarEntrada");
+    const botonesEntrada = document.getElementById("botonesEntrada");
+    const btnNuevoCliente = document.getElementById("btnNuevoCliente");
+    const btnClienteRegistrado = document.getElementById("btnClienteRegistrado");
+    const btnPagos = document.getElementById("btnPagos");
+
+    const formNuevoCliente = document.getElementById("formNuevoCliente");
+    const formClienteRegistrado = document.getElementById("formClienteRegistrado");
+    const formPago = document.getElementById("formPago");
+    const mensajeInicial = document.getElementById("mensajeInicial");
+
+    function ocultarTodosLosFormularios() {
+        [formNuevoCliente, formClienteRegistrado, formPago].forEach(form => {
+            form.classList.add("d-none");
+            form.classList.remove("fade-in");
+        });
+        mensajeInicial.classList.add("d-none");
+    }
+
+    function mostrarFormulario(formulario) {
+        ocultarTodosLosFormularios();
+        formulario.classList.remove("d-none");
+        formulario.classList.add("fade-in");
+    }
+
+    btnRegistrarEntrada.addEventListener("click", () => {
+        botonesEntrada.classList.toggle("d-none");
+    });
+
+    btnNuevoCliente.addEventListener("click", () => {
+        mostrarFormulario(formNuevoCliente);
+        botonesEntrada.classList.add("d-none");
+    });
+
+    btnClienteRegistrado.addEventListener("click", () => {
+        mostrarFormulario(formClienteRegistrado);
+        botonesEntrada.classList.add("d-none");
+    });
+
+    btnPagos.addEventListener("click", () => {
+        mostrarFormulario(formPago);
+    });
+
+
+</script>
+
+   
+
+
+    <!-- Vendor Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="owl-carousel vendor-carousel">
+                <div class="bg-light p-4">
+                    <img src="img/vendor-1.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-2.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-3.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-4.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-5.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-6.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-7.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-8.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vendor End -->
+
+
+       
+ 
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+<!-- Bootstrap JS + Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

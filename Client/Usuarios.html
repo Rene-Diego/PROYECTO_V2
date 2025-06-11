@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>ROYAL CARS - Car Rental HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rubik&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+     <!-- Navbar Start -->
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="position-relative px-lg-5" style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="" class="navbar-brand">
+                    <h1 class="text-uppercase text-primary mb-1">Estacionamiento Luigi</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+
+                        <a href="Principal.html" class="nav-item nav-link ">Inicio</a>
+                        <a href="Cliente.html" class="nav-item nav-link">Cliente</a>
+                        <a href="Usuarios.html" class="nav-item nav-link active">Usuarios</a>
+                        <a href="Estadisticas.html" class="nav-item nav-link">Estadisticas</a>
+                        <a href="servicios.html" class="nav-item nav-link">Servicios</a>
+                        <a href="index.html" class="nav-item nav-link">Cerrar sesión</a>      
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header">
+        <h1 class="display-3 text-uppercase text-white mb-3">Usuarios</h1>
+        <div class="d-inline-flex text-white">
+            <h6 class="text-uppercase m-0"><a class="text-white" href="">Inicio</a></h6>
+            <h6 class="text-body m-0 px-3">/</h6>
+            <h6 class="text-uppercase text-body m-0">usuarios</h6>
+        </div>
+    </div>
+    <!-- Page Header Start -->
+
+    
+
+ <!-- Banner Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="bg-banner py-5 px-4 text-center">
+                <!-- tabla Usuarios Start -->
+<div class="container-fluid pt-5">
+    <div class="container">
+        <h4 class="font-weight-bold " style="color: aliceblue;">Tabla de usuarios</h4>
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered text-center" id="tablaCobros">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th>ID Usuario</th>
+                        <th>Nick</th>
+                        <th>Correo</th>
+                        <th>Tipo_Usuario</th>
+                        <th>Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se agregarán dinámicamente aquí -->
+                </tbody>
+            </table>
+     
+</div>
+
+<script>
+    function cargarUsuarios() {
+        fetch("http://localhost:9090/usuario/")
+            .then(response => response.json()) // Convertir la respuesta a JSON
+            .then(data => {
+                var tabla = document.getElementById("tablaCobros").getElementsByTagName('tbody')[0];
+
+                // Limpiar la tabla antes de agregar nuevos datos
+                tabla.innerHTML = "";
+
+                data.forEach(usuario => {
+                    var fila = tabla.insertRow();
+                    fila.insertCell(0).textContent = usuario.id_usuario;
+                    fila.insertCell(1).textContent = usuario.Nick;
+                    fila.insertCell(2).textContent = usuario.Correo;
+                    fila.insertCell(3).textContent = usuario.Tipo_Usuario;
+                    fila.insertCell(4).textContent = usuario.Password;
+                });
+            })
+            .catch(error => console.error("Error al obtener los datos:", error));
+    }
+
+    // Recargar datos cuando haya interacción en la página
+    document.addEventListener("click", cargarUsuarios);  // Cuando el usuario haga clic
+    //document.addEventListener("keydown", cargarUsuarios); // Cuando el usuario presione una tecla
+
+    // Cargar los usuarios al inicio
+    document.addEventListener("DOMContentLoaded", cargarUsuarios);
+
+
+</script>
+     <!-- tabla Usuarios End -->
+            </div>
+        </div>
+    </div>
+    <!-- Banner End -->
+
+<!-- Agregar usuario Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="reservation position-relative overlay-top overlay-bottom">
+
+            <!-- Sección de botones -->
+            <div class="row align-items-center mb-4">
+                <div class="col-12">
+                    <div class="p-3">
+                        <h1 class="text-white">Acciones</h1>
+                        <div class="botones-separados mt-3">
+    <button class="btn btn-primary font-weight-bold" type="button" onclick="mostrarFormulario('formularioUsuario')">Agregar Usuario</button>
+    <button class="btn btn-primary font-weight-bold" type="button" onclick="mostrarFormulario('formularioEliminarUsuario')">Eliminar Usuario</button>
+    <button class="btn btn-primary font-weight-bold" type="button" onclick="mostrarFormulario('formularioActualizarUsuario')">Modificar Usuario</button>
+</div>
+
+                        
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- Formularios (todos debajo de los botones) -->
+            <div class="row">
+                <div class="col-12">
+                    <!-- Formulario agregar usuario -->
+
+                    <div class="container-fluid py-5" id="formularioUsuario" style="display: none;">
+                        <div class="container py-10">
+                            <div class="bg-banner py-5 px-4 text-center">
+                                <h1 class="text-white mb-4">Agregar usuario</h1>
+                        <form id="usuarioForm" class="mb-5">
+                            <div class="form-group">
+                                <input type="text" id="nick" class="form-control bg-transparent border-primary p-4" placeholder="Nick" required />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="correo" class="form-control bg-transparent border-primary p-4" placeholder="Correo" required />
+                            </div>
+                            <div class="form-group">
+                                <select id="tipoUsuario" class="custom-select bg-transparent border-primary px-4" style="height: 49px;" required>
+                                    <option value="" selected disabled>Tipo de Usuario</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Empleado">Empleado</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="password" class="form-control bg-transparent border-primary p-4" placeholder="Password" required />
+                            </div>
+                            <div>
+                                <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit">Agregar</button>
+                            </div>
+                        </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulario eliminar usuario -->
+                    <div class="container-fluid py-5" id="formularioEliminarUsuario" style="display: none;">
+                        <div class="container py-10">
+                            <div class="bg-banner py-5 px-4 text-center">
+                                                                <h1 class="text-white mb-4">Eliminar usuario</h1>
+                        <form id="eliminarUsuarioForm" class="mb-5">
+                            <div class="form-group">
+                                <input type="text" id="Nick" class="form-control bg-transparent border-primary p-4" placeholder="Nick" required />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="id_usuario" class="form-control bg-transparent border-primary p-4" placeholder="ID de usuario" required />
+                            </div>
+                            <div>
+                                <button class="btn btn-danger btn-block font-weight-bold py-3" type="submit">Eliminar</button>
+                            </div>
+                        </form>
+            
+                            </div>
+                        </div>
+
+
+                       
+                    </div>
+
+                    <!-- Formulario actualizar usuario -->
+                    <div class="container-fluid py-5" id="formularioActualizarUsuario" style="display: none;">
+    <div class="container">
+        <div class="bg-banner py-5 px-4">
+            <h1 class="text-white mb-4 text-center">Actualizar usuario</h1>
+            <form class="mb-5">
+                <div class="row">
+                    <!-- Columna izquierda: Buscar por ID -->
+                    <div class="col-md-4 mb-4">
+                        <div class="form-group">
+                            <label class="text-white">ID de usuario</label>
+                            <input type="text" id="idUsuario" class="form-control bg-transparent border-primary p-4" placeholder="ID de usuario" required />
+                        </div>
+                        <button class="btn btn-warning btn-block font-weight-bold py-3 mt-2" type="button" onclick="cargarUsuarioId(document.getElementById('idUsuario').value)">Buscar</button>
+                    </div>
+
+                    <!-- Columna derecha: Datos del usuario -->
+                    <div class="col-md-8">
+                        <h4 class="text-white mb-4">Modificar usuario</h4>
+                        <div class="form-group">
+                            <input type="text" id="nickU" class="form-control bg-transparent border-primary p-4 mb-3" placeholder="Nick" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="correoU" class="form-control bg-transparent border-primary p-4 mb-3" placeholder="Correo" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="tipoU" class="form-control bg-transparent border-primary p-4 mb-3" placeholder="Tipo de Usuario" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="passwordU" class="form-control bg-transparent border-primary p-4 mb-3" placeholder="Password" required />
+                        </div>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn btn-primary font-weight-bold py-3 px-4" onclick="actualizarU()">Actualizar</button>
+                            <button class="btn btn-secondary font-weight-bold py-3 px-4" onclick="cancelarActualizar()">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<style>
+    input.form-control,
+    select.custom-select {
+        color: white;
+    }
+
+    ::placeholder { /* Para los placeholders */
+        color: rgba(255, 255, 255, 0.834);
+    }
+
+    select option {
+        color: black; /* Esto es necesario si usas fondo transparente para los <option> */
+    }
+</style>
+
+<!-- Scripts -->
+<script>
+    function mostrarFormulario(formularioId) {
+        const formularios = ["formularioUsuario", "formularioEliminarUsuario", "formularioActualizarUsuario"];
+        formularios.forEach(id => document.getElementById(id).style.display = "none");
+        document.getElementById(formularioId).style.display = "block";
+    }
+
+    function cancelarActualizar() {
+        document.getElementById("idUsuario").value = "";
+        document.getElementById("nickU").value = "";
+        document.getElementById("correoU").value = "";
+        document.getElementById("tipoU").value = "";
+        document.getElementById("passwordU").value = "";
+    }
+
+    function cargarUsuarioId(idUsuario) {
+        fetch(`http://localhost:9090/usuario/${idUsuario}`)
+            .then(response => {
+                if (!response.ok) throw new Error("Usuario no encontrado");
+                return response.json();
+            })
+            .then(usuario => {
+                document.getElementById("nickU").value = usuario.Nick || "";
+                document.getElementById("correoU").value = usuario.Correo || "";
+                document.getElementById("tipoU").value = usuario.Tipo_Usuario || "";
+                document.getElementById("passwordU").value = usuario.Password || "";
+            })
+            .catch(error => {
+                alert("El usuario no existe. Verifica el ID.");
+                cancelarActualizar();
+            });
+    }
+
+    function actualizarU() {
+        event.preventDefault();
+        const id_usuario = document.getElementById("idUsuario").value;
+        const Nick = document.getElementById("nickU").value;
+        const Correo = document.getElementById("correoU").value;
+        const Tipo_Usuario = document.getElementById("tipoU").value;
+        const Password = document.getElementById("passwordU").value;
+
+        if (["Admin", "Cliente", "Empleado"].includes(Tipo_Usuario)) {
+            fetch("http://localhost:9090/usuario/", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id_usuario, Nick, Correo, Tipo_Usuario, Password })
+            })
+                .then(response => response.json())
+                .then(data => alert("Usuario actualizado correctamente!"))
+                .catch(error => alert("Hubo un problema al actualizar el usuario."));
+        } else {
+            alert("Tipo de usuario inválido. Debe ser Admin o Empleado.");
+        }
+    }
+
+  document.getElementById("usuarioForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const password = document.getElementById("password").value;
+    const regexPassword = /^(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+
+    // Validar que la contraseña tenga al menos 8 caracteres y un carácter especial
+    if (!regexPassword.test(password)) {
+        alert("La contraseña debe tener al menos 8 caracteres y al menos un carácter especial.");
+        return;
+    }
+
+    const datos = {
+        Nick: document.getElementById("nick").value,
+        Correo: document.getElementById("correo").value,
+        Tipo_Usuario: document.getElementById("tipoUsuario").value,
+        Password: password // Contraseña validada
+    };
+
+    fetch("http://localhost:9090/usuario/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(datos)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.mensaje || "Usuario registrado correctamente");
+        document.getElementById("usuarioForm").reset();
+    })
+    .catch(error => alert("Hubo un problema al registrar el usuario."));
+});
+
+    document.getElementById("eliminarUsuarioForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const id_usuario = document.getElementById("id_usuario").value;
+        const Nick = document.getElementById("Nick").value;
+
+        fetch(`http://localhost:9090/usuario/${id_usuario}/${Nick}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" }
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.mensaje || "Usuario eliminado correctamente");
+                document.getElementById("eliminarUsuarioForm").reset();
+            })
+            .catch(error => alert("Hubo un problema al eliminar el usuario."));
+    });
+</script>
+<!-- Agregar usuario End -->
+
+
+    <!-- Vendor Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="owl-carousel vendor-carousel">
+                <div class="bg-light p-4">
+                    <img src="img/vendor-1.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-2.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-3.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-4.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-5.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-6.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-7.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-8.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vendor End -->
+
+
+   
+    
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

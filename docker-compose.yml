@@ -1,0 +1,26 @@
+
+
+services:
+  client:
+    build: ./Client
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    depends_on:
+      - server
+    networks:
+      - app-network
+
+  server:
+    build: ./Server
+    ports:
+      - "9090:9090"
+    environment:
+      NODE_ENV: development
+    restart: unless-stopped
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

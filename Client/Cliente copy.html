@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>ROYAL CARS - Car Rental HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rubik&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+   
+   <!-- Navbar Start -->
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="position-relative px-lg-5" style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="" class="navbar-brand">
+                    <h1 class="text-uppercase text-primary mb-1">Estacionamiento Luigi</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+
+                        <a href="Principal copy.html" class="nav-item nav-link ">Inicio</a>
+                        <a href="Cliente copy.html" class="nav-item nav-link active">Cliente</a>
+                        <a href="Estadisticas copy.html" class="nav-item nav-link ">Estadisticas</a>
+                        <a href="servicios copy.html" class="nav-item nav-link">Servicios</a>
+                        <a href="index.html" class="nav-item nav-link">Cerrar sesión</a>      
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header">
+        <h1 class="display-3 text-uppercase text-white mb-3">Cliente</h1>
+        <div class="d-inline-flex text-white">
+            <h6 class="text-uppercase m-0"><a class="text-white" href="">Inicio</a></h6>
+            <h6 class="text-body m-0 px-3">/</h6>
+            <h6 class="text-uppercase text-body m-0">Cliente</h6>
+        </div>
+    </div>
+    <!-- Page Header Start -->
+    <!-- Services Start -->
+<div class="container-fluid py-5">
+    <div class="container pt-5 pb-3">
+        <h1 class="display-4 text-uppercase text-center mb-5">Servicios de Cliente</h1>
+        <div class="row">
+            <!-- Agregar Usuario -->
+            <div class="col-lg-4 col-md-6 mb-2">
+                <div class="service-item d-flex flex-column justify-content-center px-4 mb-4"
+                     style="cursor: pointer;" 
+                     onclick="toggleFormulario('FormularioCliente')">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <div class="d-flex align-items-center justify-content-center bg-primary ml-n4"
+                             style="width: 80px; height: 80px;">
+                            <i class="fa fa-2x fa-user-plus text-secondary"></i>
+                        </div>
+                        <h1 class="display-2 text-white mt-n2 m-0">01</h1>
+                    </div>
+                    <h4 class="text-uppercase mb-3">Agregar Cliente</h4>
+                    <p class="m-0">Formulario para registrar un nuevo Cliente en el sistema.</p>
+                </div>
+            </div>
+
+            <!-- Eliminar Usuario -->
+            <div class="col-lg-4 col-md-6 mb-2">
+                <div class="service-item d-flex flex-column justify-content-center px-4 mb-4"
+                     style="cursor: pointer;" 
+                     onclick="toggleFormulario('FormularioEliminarCliente')">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <div class="d-flex align-items-center justify-content-center bg-primary ml-n4"
+                             style="width: 80px; height: 80px;">
+                            <i class="fa fa-2x fa-user-times text-secondary"></i>
+                        </div>
+                        <h1 class="display-2 text-white mt-n2 m-0">02</h1>
+                    </div>
+                    <h4 class="text-uppercase mb-3">Eliminar Cliente</h4>
+                    <p class="m-0">Formulario para dar de baja a un cliente existente.</p>
+                </div>
+            </div>
+
+            <!-- Actualizar Usuario -->
+            <div class="col-lg-4 col-md-6 mb-2">
+                <div class="service-item d-flex flex-column justify-content-center px-4 mb-4"
+                     style="cursor: pointer;" 
+                     onclick="toggleFormulario('FormularioActualizarCliente')">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <div class="d-flex align-items-center justify-content-center bg-primary ml-n4"
+                             style="width: 80px; height: 80px;">
+                            <i class="fa fa-2x fa-user-edit text-secondary"></i>
+                        </div>
+                        <h1 class="display-2 text-white mt-n2 m-0">03</h1>
+                    </div>
+                    <h4 class="text-uppercase mb-3">Actualizar Cliente</h4>
+                    <p class="m-0">Formulario para modificar datos de un cliente registrado.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+         
+            <div class="row">
+                <div class="col-12">
+                    <!-- Formulario agregar  -->
+
+                    <div class="container-fluid py-5" id="FormularioCliente" style="display: none;">
+                        <div class="container py-10">
+                            <div class="bg-banner py-5 px-4 text-center">
+                                <h1 class="text-white mb-4">Datos del cliente</h1>
+                        <form id="AgregarCliente" class="mb-5">
+                            <div class="form-group">
+                                <label class="text-white">Nombre</label>
+                                <input type="text" id="NombreC" class="form-control bg-transparent border-primary p-4" placeholder="Nombre" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="text-white">No. Telefono</label>
+                                <input type="text" id="TelefonoC" class="form-control bg-transparent border-primary p-4" placeholder="Telefono" required />
+                            </div>
+                            <h1 class="text-white mb-4">Datos del Auto</h1>
+                            <div class="form-group">
+                                <label class="text-white">No. Placa</label>
+                                <input type="text" id="PlacaA" class="form-control bg-transparent border-primary p-4" placeholder="Placa" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="text-white">Marca</label>
+                                <input type="text" id="MarcaA" class="form-control bg-transparent border-primary p-4" placeholder="Marca" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="text-white">Color</label>
+                                <input type="text" id="ColorA" class="form-control bg-transparent border-primary p-4" placeholder="Color" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="text-white">Tipo</label>
+                                <input type="text" id="TipoA" class="form-control bg-transparent border-primary p-4" placeholder="Tipo" required />
+                            </div>
+                            <div class="form-group">
+                            <div>
+                                <button class="btn btn-primary btn-block font-weight-bold py-3"  type="submit">Agregar</button>
+                            </div>
+                        </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                           
+                <div class="col-12">
+                                        <!-- Formulario eliminar -->
+                    <div class="container-fluid py-5" id="FormularioEliminarCliente" style="display: none;">
+                        <div class="container py-10">
+                            <div class="bg-banner py-5 px-4 text-center">
+                                                                <h1 class="text-white mb-4">Eliminar Cliente</h1>
+                        <form id="eliminarClienteForm" class="mb-5">
+                            <div class="form-group">
+                                <label class="text-white">id del cliente</label>
+                                <input type="text" id="id_cliente" class="form-control bg-transparent border-primary p-4" placeholder="ID de cliente" required />
+                            </div>
+                            
+                            <div>
+                                <button class="btn btn-danger btn-block font-weight-bold py-3" type="submit">Eliminar</button>
+                            </div>
+                        </form>
+            
+                            </div>
+                        </div>
+
+
+                       
+                    </div>
+                </div>
+                <div class="col-12">
+                    <!-- Formulario actualizar usuario -->
+                    <div class="container-fluid py-5" id="FormularioActualizarCliente" style="display: none;">
+    <div class="container">
+        <div class="bg-banner py-5 px-4">
+            <h1 class="text-white mb-4 text-center">Actualizar Cliente</h1>
+            <form class="mb-5">
+                <div class="row">
+                    <!-- Columna izquierda: Buscar por ID -->
+                    <div class="col-md-3 mb-4">
+                        <div class="form-group">
+                            <label class="text-white">ID de Cliente</label>
+                            <input type="text" id="idcliente" class="form-control bg-transparent border-primary p-4" placeholder="ID de Cliente" required />
+                        </div>
+                        <button class="btn btn-warning btn-block font-weight-bold py-3 mt-2" type="button" onclick="cargarClienteId(document.getElementById('idcliente').value)">Buscar</button>
+
+                    
+                    </div>
+
+                                        <!-- Columna derecha: Datos del auto -->
+                   
+                    <div class="col-md-4 mb-4">
+                                              
+                        
+
+                            <h4 class="text-white mb-4">Datos del Auto</h4>
+                            <div class="form-group">
+                                <label class="text-white">Placa</label>
+                                <input type="text" id="placaAC" class="form-control bg-transparent border-primary p-4" placeholder="Placa" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="text-white">Marca</label>
+                                <input type="text" id="marcaAC" class="form-control bg-transparent border-primary p-4" placeholder="Marca" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="text-white">Color</label>
+                                <input type="text" id="colorAC" class="form-control bg-transparent border-primary p-4" placeholder="Color" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="text-white">Tipo</label>
+                                <input type="text" id="tipoAC" class="form-control bg-transparent border-primary p-4" placeholder="Tipo" required />
+                            </div>
+                            <div class="form-group">
+                           
+                        
+                            </div>
+                   
+                   
+                      
+                  
+                    </div>  
+                     <!-- Columna central: datos cliente -->
+                    <div class="col-md-4 mb-4">
+                                <h4 class="text-white mb-4">Datos del cliente</h4>
+                            <div class="form-group">
+                                <label class="text-white">Nombre</label>
+                                <input type="text" id="NombreAC" class="form-control bg-transparent border-primary p-4" placeholder="Nombre" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="text-white">Telefono</label>
+                                <input type="text" id="TelefonoAC" class="form-control bg-transparent border-primary p-4" placeholder="Telefono" required />
+                            </div>
+                        <button class="btn btn-warning btn-block font-weight-bold py-3 mt-2" type="button" onclick="actualizarC()">Actualizar</button>
+                        <button class="btn btn-warning btn-block font-weight-bold py-3 mt-2" type="button"  onclick="cancelarActualizar()">Cancelar</button>
+                    </div>
+
+  
+                   
+
+
+               
+            </form>
+        </div>
+    </div>
+</div>
+                </div>
+        
+            </div>
+
+
+<!-- Services End -->
+
+<style>
+    input.form-control,
+    select.custom-select {
+        color: white;
+    }
+
+    ::placeholder { /* Para los placeholders */
+        color: rgba(255, 255, 255, 0.834);
+    }
+
+    select option {
+        color: black; /* Esto es necesario si usas fondo transparente para los <option> */
+    }
+</style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+    function toggleFormulario(formularioId) {
+        const formularios = [
+            "FormularioCliente",
+            "FormularioEliminarCliente",
+            "FormularioActualizarCliente"
+        ];
+
+        // Si el formulario actual ya está visible, lo ocultamos
+        const formActual = document.getElementById(formularioId);
+        const estaVisible = formActual.style.display === "block";
+
+        // Ocultamos todos
+        formularios.forEach(id => {
+            document.getElementById(id).style.display = "none";
+        });
+
+        // Si no estaba visible antes, ahora lo mostramos
+        if (!estaVisible) {
+            formActual.style.display = "block";
+            formActual.scrollIntoView({ behavior: "smooth" });
+        }
+    }
+
+//formulario agregar cliente
+
+document.getElementById("AgregarCliente").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const telefono = document.getElementById("TelefonoC").value.trim();
+    const regexTelefono = /^\d{10}$/;
+
+    // Validar que el teléfono tenga exactamente 10 dígitos y solo números
+    if (!regexTelefono.test(telefono)) {
+        alert("El número de teléfono debe tener exactamente 10 dígitos y solo contener números.");
+        return;
+    }
+
+    const datos = {
+        Nombre: document.getElementById("NombreC").value,
+        Telefono: telefono, // Teléfono validado
+        Placa: document.getElementById("PlacaA").value,
+        Marca: document.getElementById("MarcaA").value,
+        Color: document.getElementById("ColorA").value,
+        Tipo: document.getElementById("TipoA").value
+    };
+
+    fetch("http://localhost:9090/cliente/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(datos)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.mensaje || "Cliente registrado correctamente");
+        document.getElementById("AgregarCliente").reset();
+        generarPDFCliente();
+    })
+    .catch(error => alert("Hubo un problema al registrar el cliente."));
+});
+
+
+          async function generarPDFCliente() {
+            try {
+                const response = await fetch("http://localhost:9090/cliente/");
+                if (!response.ok) {
+                    throw new Error("Error al obtener los datos");
+                }
+                const data = await response.json();
+                const ultimoRegistro = data[data.length - 1]; // Asumiendo que el último es el último en el array
+
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                doc.text("Datos del Cliente", 10, 10);
+                doc.text(`ID Cliente: ${ultimoRegistro.id_cliente}`, 10, 20);
+                doc.text(`Nombre: ${ultimoRegistro.Nombre}`, 10, 30);
+                doc.text(`Teléfono: ${ultimoRegistro.Telefono}`, 10, 40);
+                
+
+                doc.text("Autos Asociados:", 10, 70);
+                if (ultimoRegistro.autos && ultimoRegistro.autos.length > 0) {
+                    let y = 80;
+                    ultimoRegistro.autos.forEach(auto => {
+                        doc.text(`ID Auto: ${auto.id_Auto}`, 10, y);
+                        doc.text(`Placa: ${auto.Placa}`, 10, y + 10);
+                        doc.text(`Marca: ${auto.Marca}`, 10, y + 20);
+                        doc.text(`Color: ${auto.Color}`, 10, y + 30);
+                        doc.text(`Tipo: ${auto.Tipo}`, 10, y + 40);
+                        y += 50;
+                    });
+                } else {
+                    doc.text("No hay autos registrados.", 10, 80);
+                }
+
+                doc.save("cliente.pdf");
+                alert("PDF generado con éxito");
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Hubo un problema al generar el PDF");
+            }
+        }
+//Formulario eliminar cliente
+
+
+    document.getElementById("FormularioEliminarCliente").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const id_cliente = document.getElementById("id_cliente").value;
+       
+
+        fetch(`http://localhost:9090/cliente/${id_cliente}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" }
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.mensaje || "Usuario eliminado correctamente");
+                document.getElementById("eliminarClienteForm").reset();
+            })
+            .catch(error => alert("Hubo un problema al eliminar el usuario."));
+    });
+
+
+//formulario actualizar
+
+function cargarClienteId(idcliente) {
+    fetch(`http://localhost:9090/cliente/${idcliente}`)
+        .then(response => {
+            if (!response.ok) throw new Error("Cliente no encontrado");
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById("NombreAC").value = data.Nombre || "";
+            document.getElementById("TelefonoAC").value = data.Telefono || "";
+            document.getElementById("placaAC").value = data.Placa || "";
+            document.getElementById("marcaAC").value = data.Marca || "";
+            document.getElementById("colorAC").value = data.Color || "";
+            document.getElementById("tipoAC").value = data.Tipo || "";
+        })
+        .catch(error => {
+            alert(error.message);
+            cancelarActualizar();
+        });
+}
+
+    function actualizarC() {
+        event.preventDefault();
+        const id_cliente= document.getElementById("idcliente").value;
+        const Nombre = document.getElementById("NombreAC").value;
+        const Telefono = document.getElementById("TelefonoAC").value ;
+        const Placa = document.getElementById("placaAC").value ;
+        const Marca = document.getElementById("marcaAC").value ;
+        const Color = document.getElementById("colorAC").value  ;
+        const Tipo = document.getElementById("tipoAC").value ;
+
+
+            fetch("http://localhost:9090/cliente/", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id_cliente, Nombre, Telefono, Placa, Marca, Color, Tipo })
+            })
+                .then(response => response.json())
+                .then(data => {alert("Cliente actualizado correctamente!")
+                 cancelarActualizar();
+            
+            })
+                .catch(error => {alert("Hubo un problema al actualizar el Cliente.");
+                 cancelarActualizar();
+            
+            });
+
+    }
+
+        function cancelarActualizar() {
+        document.getElementById("idcliente").value = "";
+        document.getElementById("NombreAC").value = "";
+        document.getElementById("TelefonoAC").value = "";
+        document.getElementById("placaAC").value = "";
+        document.getElementById("marcaAC").value = "";
+        document.getElementById("colorAC").value = "";
+        document.getElementById("tipoAC").value = "";
+
+    }
+</script>
+
+
+
+    <!-- Banner Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="bg-banner py-5 px-4 text-center">
+                <!-- tabla Usuarios Start -->
+<div class="container-fluid pt-5">
+    <div class="container">
+        <h4 class="font-weight-bold " style="color: aliceblue;">Tabla de clientes</h4>
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered text-center" id="tablaCobros">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th>ID Cliente</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>placa</th>
+                        <th>Marca</th>
+                        <th>Color</th>
+                        <th>tipo</th>
+                      
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se agregarán dinámicamente aquí -->
+                </tbody>
+            </table>
+     
+</div>
+
+<script>
+function cargarCliente() {
+    fetch("http://localhost:9090/cliente/")
+        .then(response => response.json()) // Convertir la respuesta a JSON
+        .then(data => {
+            var tabla = document.getElementById("tablaCobros").getElementsByTagName('tbody')[0];
+
+            // Limpiar la tabla antes de agregar nuevos datos
+            tabla.innerHTML = "";
+
+            data.forEach(cliente => {
+                var fila = tabla.insertRow(); // Crear una fila por cada cliente
+                
+                // Columnas de cliente
+                fila.insertCell(0).textContent = cliente.id_cliente;
+                fila.insertCell(1).textContent = cliente.Nombre;
+                fila.insertCell(2).textContent = cliente.Telefono;
+
+                // Si tiene autos, mostrar el primero en la misma fila
+                if (cliente.autos && cliente.autos.length > 0) {
+                    fila.insertCell(3).textContent = cliente.autos[0].Placa;
+                    fila.insertCell(4).textContent = cliente.autos[0].Marca;
+                    fila.insertCell(5).textContent = cliente.autos[0].Color;
+                    fila.insertCell(6).textContent = cliente.autos[0].Tipo;
+
+                    // Si hay más autos, agregarlos en nuevas filas pero dejando en blanco los datos del cliente
+                    for (let i = 1; i < cliente.autos.length; i++) {
+                        var filaAuto = tabla.insertRow();
+                        filaAuto.insertCell(0).textContent = ""; // Vacío para que solo aparezcan los autos
+                        filaAuto.insertCell(1).textContent = "";
+                        filaAuto.insertCell(2).textContent = "";
+                        filaAuto.insertCell(3).textContent = cliente.autos[i].Placa;
+                        filaAuto.insertCell(4).textContent = cliente.autos[i].Marca;
+                        filaAuto.insertCell(5).textContent = cliente.autos[i].Color;
+                        filaAuto.insertCell(6).textContent = cliente.autos[i].Tipo;
+                    }
+                } else {
+                    // Si no tiene autos, colocar "Sin autos registrados" en una sola celda
+                    fila.insertCell(3).textContent = "Sin autos registrados";
+                    fila.insertCell(4).textContent = "";
+                    fila.insertCell(5).textContent = "";
+                    fila.insertCell(6).textContent = "";
+                }
+            });
+        })
+        .catch(error => console.error("Error al obtener los datos:", error));
+}
+
+    // Recargar datos cuando haya interacción en la página
+    document.addEventListener("click", cargarCliente);  // Cuando el usuario haga clic
+    //document.addEventListener("keydown", cargarCliente); // Cuando el usuario presione una tecla
+
+    // Cargar los usuarios al inicio
+    document.addEventListener("DOMContentLoaded", cargarCliente);
+
+
+
+</script>
+     <!-- tabla Usuarios End -->
+            </div>
+        </div>
+    </div>
+    <!-- Banner End -->
+
+
+    <!-- Vendor Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="owl-carousel vendor-carousel">
+                <div class="bg-light p-4">
+                    <img src="img/vendor-1.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-2.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-3.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-4.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-5.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-6.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-7.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-8.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vendor End -->
+
+
+    
+   
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

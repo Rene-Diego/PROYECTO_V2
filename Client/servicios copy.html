@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>ROYAL CARS - Car Rental HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Rubik&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+ <!-- Navbar Start -->
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="position-relative px-lg-5" style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="" class="navbar-brand">
+                    <h1 class="text-uppercase text-primary mb-1">Estacionamiento Luigi</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+
+                        <a href="Principal copy.html" class="nav-item nav-link ">Inicio</a>
+                        <a href="Cliente copy.html" class="nav-item nav-link ">Cliente</a>
+                        <a href="Estadisticas copy.html" class="nav-item nav-link">Estadisticas</a>
+                        <a href="servicios copy.html" class="nav-item nav-link active">Servicios</a>
+                        <a href="index.html" class="nav-item nav-link">Cerrar sesión</a>      
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header">
+        <h1 class="display-3 text-uppercase text-white mb-3">Servicios</h1>
+        <div class="d-inline-flex text-white">
+            <h6 class="text-uppercase m-0"><a class="text-white" href="">Inicio</a></h6>
+            <h6 class="text-body m-0 px-3">/</h6>
+            <h6 class="text-uppercase text-body m-0">Servicios</h6>
+        </div>
+    </div>
+    <!-- Page Header Start -->
+
+
+<!-- Related Car Start -->
+<div class="container-fluid pb-5">
+    <div class="container pb-5">
+        <h2 class="mb-4 " style="text-align: center;">TIPOS DE SERVICIO</h2>
+        <div class="owl-carousel related-carousel position-relative" style="padding: 0 30px;">
+            <div class="rent-item">
+                <img class="img-fluid mb-4" src="img/reloj-1.jpg" alt="">
+                <h4 class="text-uppercase mb-4">1 hora entre semana</h4>
+                <div class="d-flex justify-content-center mb-4">
+                    <div class="px-2">
+                        <i class="fa fa-car text-primary mr-1"></i>
+                        <span id="tarifa1" style="font-size: 20px; font-weight: bold;">10</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary px-3" onclick="abrirModal('tarifa1')">Modificar tarifa</button>
+            </div>
+
+            <div class="rent-item">
+                <img class="img-fluid mb-4" src="img/R.jpeg" alt="">
+                <h4 class="text-uppercase mb-4">Tiempo libre entre semana</h4>
+                <div class="d-flex justify-content-center mb-4">
+                    <div class="px-2">
+                        <i class="fa fa-car text-primary mr-1"></i>
+                        <span id="tarifa2" style="font-size: 20px; font-weight: bold;">30</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary px-3" onclick="abrirModal('tarifa2')">Modificar tarifa</button>
+            </div>
+
+            <div class="rent-item">
+                <img class="img-fluid mb-4" src="img/dia-festivo.jpeg" alt="">
+                <h4 class="text-uppercase mb-4">Tiempo libre en días festivos o fin de semana</h4>
+                <div class="d-flex justify-content-center mb-4">
+                    <div class="px-2">
+                        <i class="fa fa-car text-primary mr-1"></i>
+                        <span id="tarifa3" style="font-size: 20px; font-weight: bold;">60</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary px-3" onclick="abrirModal('tarifa3')">Modificar tarifa</button>
+            </div>
+
+            <div class="rent-item">
+                <img class="img-fluid mb-4" src="img/fin.jpeg" alt="">
+                <h4 class="text-uppercase mb-4">1 hora en fin de semana</h4>
+                <div class="d-flex justify-content-center mb-4">
+                    <div class="px-2">
+                        <i class="fa fa-car text-primary mr-1"></i>
+                        <span id="tarifa4" style="font-size: 20px; font-weight: bold;">15</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary px-3" onclick="abrirModal('tarifa4')">Modificar tarifa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="tarifaModal" tabindex="-1" role="dialog" aria-labelledby="tarifaModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tarifaModalLabel">Modificar tarifa</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="nuevaTarifa">Nueva tarifa:</label>
+        <input type="text" class="form-control" id="nuevaTarifa" placeholder="Ingresa nueva tarifa">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="guardarTarifa()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let tarifaSeleccionada = null;
+
+function abrirModal(tarifaId) {
+    tarifaSeleccionada = tarifaId; // Guarda el ID del elemento que se va a modificar
+    document.getElementById("nuevaTarifa").value = ""; // Limpia el campo
+    $('#tarifaModal').modal('show'); // Muestra el modal
+}
+
+function guardarTarifa() {
+    const nuevaTarifa = document.getElementById("nuevaTarifa").value;
+
+    if (!tarifaSeleccionada) {
+        alert("Error: No se ha seleccionado una tarifa.");
+        return;
+    }
+
+    if (nuevaTarifa.trim() === "" || isNaN(nuevaTarifa)) {
+        alert("Por favor, ingresa un valor numérico válido.");
+        return;
+    }
+
+    // Guarda el valor en Local Storage
+    localStorage.setItem(tarifaSeleccionada, nuevaTarifa);
+
+    // Actualiza el precio en pantalla
+    const tarifaElemento = document.getElementById(tarifaSeleccionada);
+    tarifaElemento.textContent = nuevaTarifa;
+    tarifaElemento.style.fontSize = "24px";
+    tarifaElemento.style.color = "red";
+
+    $('#tarifaModal').modal('hide');
+}
+
+// Recupera la tarifa al cargar la página
+document.addEventListener("DOMContentLoaded", function () {
+    ["tarifa1", "tarifa2", "tarifa3", "tarifa4"].forEach(id => {
+        const tarifaGuardada = localStorage.getItem(id);
+        if (tarifaGuardada) {
+            document.getElementById(id).textContent = tarifaGuardada;
+        }
+    });
+});
+</script>
+
+
+   
+
+
+    <!-- Detail Start -->
+    <div class="container-fluid pt-5">
+        <div class="container pt-5">
+            <h2 class="mb-4">TABLA CAJONES </h2>
+            <div class="row">
+                
+                <div class="col-lg-8 mb-5">
+                    <div class="table-responsive mt-3">
+            <table class="table table-bordered text-center" id="tablaCobros">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th>ID Cajón</th>
+                        <th>Estado</th>
+                        <th>id Servicio</th>
+                        <th>Tipo</th>
+                        <th>Tamaño</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se agregarán dinámicamente aquí -->
+                </tbody>
+            </table>
+     
+</div>
+
+<script>
+function cargarCajon() {
+    fetch("http://localhost:9090/cajon/")
+        .then(response => response.json())
+        .then(cajones => {
+            fetch("http://localhost:9090/servicio/")
+                .then(response => response.json())
+                .then(servicios => {
+                    var tabla = document.getElementById("tablaCobros").getElementsByTagName('tbody')[0];
+                    tabla.innerHTML = ""; // Limpiar tabla
+
+                    cajones.forEach(cajon => {
+                        let idEstacionamiento = "No disponible";
+
+                        if (cajon.Estado === "Ocupado") {
+                            // Filtrar servicios que coincidan con el id_Cajon
+                            let serviciosFiltrados = servicios.filter(servicio => servicio.id_Cajon === cajon.id_Cajon);
+
+                            if (serviciosFiltrados.length > 0) {
+                                // Obtener el último agregado en la lista
+                                idEstacionamiento = serviciosFiltrados[serviciosFiltrados.length - 1].id_Estacionamiento;
+                            }
+                        }
+
+                        // Agregar la fila con los datos requeridos
+                        var fila = tabla.insertRow();
+                        fila.insertCell(0).textContent = cajon.id_Cajon;
+                        fila.insertCell(1).textContent = cajon.Estado;
+                        fila.insertCell(2).textContent = idEstacionamiento; // Nueva columna con el último agregado
+                        fila.insertCell(3).textContent = cajon.Tipo;
+                        fila.insertCell(4).textContent = cajon.Tamaño;
+                    });
+                })
+                .catch(error => console.error("Error al obtener los servicios:", error));
+        })
+        .catch(error => console.error("Error al obtener los cajones:", error));
+}
+
+document.addEventListener("click", cargarCajon);
+document.addEventListener("DOMContentLoaded", cargarCajon);
+
+
+</script>
+               </div>
+
+                <div class="col-lg-4 mb-5">
+                    <div class="bg-secondary p-5">
+                        <h3 class="text-primary text-center mb-4">AGREGAR CAJÓN</h3>
+<form id="cajonForm">
+    <div class="form-group">
+        <label class="text-white">Estado</label>
+        <select id="Estado" class="custom-select px-4" style="height: 50px;">
+            <option value="Ocupado">Ocupado</option>
+            <option value="Disponible">Disponible</option>
+            <option value="Mantenimiento">Mantenimiento</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="text-white">Tamaño</label>
+        <select id="Tamaño" class="custom-select px-4" style="height: 50px;">
+            <option value="Pequeño">Pequeño</option>
+            <option value="Mediano">Mediano</option>
+            <option value="Grande">Grande</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="text-white">Tipo</label>
+        <select id="Tipo" class="custom-select px-4" style="height: 50px;">
+            <option value="Normal">Normal</option>
+            <option value="Para discapacitados">Para discapacitados</option>
+        </select>
+    </div>
+    <div class="form-group mb-0">
+        <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit">Agregar</button>
+    </div>
+</form>
+
+<script>
+    document.getElementById("cajonForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+        // Obtener los valores seleccionados
+        const datos = {
+            Estado: document.getElementById("Estado").value,
+            Tamaño: document.getElementById("Tamaño").value,
+            Tipo: document.getElementById("Tipo").value
+        };
+
+        // Enviar los datos al servidor
+        fetch("http://localhost:9090/cajon/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(datos)
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("Error al registrar el cajón.");
+            return response.json();
+        })
+        .then(data => {
+            alert(data.mensaje || "Cajón registrado correctamente");
+            document.getElementById("cajonForm").reset();
+            cargarCajon();
+        })
+        .catch(error => {
+            alert(error.message);
+        });
+    });
+</script>
+                      <h3 class="text-primary text-center mb-4">EDITAR CAJÓN </h3>
+
+<form id="cajonForm1">
+        <div class="form-group">
+        <label class="text-white">Id del cajón</label>
+        <input type="text" id="id_Cajon" class="form-control bg-transparent border-primary p-4" placeholder="Id del cajón a eliminar" required />
+    </div>
+    <div class="form-group">
+        <label class="text-white">Estado</label>
+        <select id="Estado2" class="custom-select px-4" style="height: 50px;">
+            <option value="Ocupado">Ocupado</option>
+            <option value="Disponible">Disponible</option>
+            <option value="Mantenimiento">Mantenimiento</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="text-white">Tamaño</label>
+        <select id="Tamaño2" class="custom-select px-4" style="height: 50px;">
+            <option value="Pequeño">Pequeño</option>
+            <option value="Mediano">Mediano</option>
+            <option value="Grande">Grande</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="text-white">Tipo</label>
+        <select id="Tipo2" class="custom-select px-4" style="height: 50px;">
+            <option value="Normal">Normal</option>
+            <option value="Para discapacitados">Para discapacitados</option>
+        </select>
+    </div>
+    <div class="form-group mb-0">
+        <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit">Actualizar</button>
+    </div>
+</form>
+<script>
+    document.getElementById("cajonForm1").addEventListener("submit", function (event) {
+        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+        // Obtener los valores seleccionados
+        const datos = {
+            id_Cajon:document.getElementById("id_Cajon").value,
+            Estado: document.getElementById("Estado2").value,
+            Tamaño: document.getElementById("Tamaño2").value,
+            Tipo: document.getElementById("Tipo2").value
+        };
+
+        // Enviar los datos al servidor
+        fetch(`http://localhost:9090/cajon/${id_Cajon}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(datos)
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("Error al registrar el cajón.");
+            return response.json();
+        })
+        .then(data => {
+            alert(data.mensaje || "Cajón registrado correctamente");
+            document.getElementById("cajonForm").reset();
+            cargarCajon();
+        })
+        .catch(error => {
+            alert(error.message);
+        });
+    });
+</script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    
+    <!-- Detail End -->
+    <!-- Vendor Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="owl-carousel vendor-carousel">
+                <div class="bg-light p-4">
+                    <img src="img/vendor-1.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-2.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-3.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-4.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-5.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-6.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-7.png" alt="">
+                </div>
+                <div class="bg-light p-4">
+                    <img src="img/vendor-8.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vendor End -->
+
+
+
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+   
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
