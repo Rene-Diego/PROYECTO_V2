@@ -8,7 +8,7 @@ async function connect() {
             host: "18.117.135.191",
             user: "EquipoRene",
             password: "18100qAb*",
-            database: "Estacionamiento", //nombre de la base de datos a la cual te estas conectando
+            database: "Estacionamiento",
             charset: "utf8mb4"
         });
         console.log("Conexión a la base de datos establecida correctamente.");

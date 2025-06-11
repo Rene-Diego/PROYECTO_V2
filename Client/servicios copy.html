@@ -30,7 +30,7 @@
 </head>
 
 <body>
- <!-- Navbar Start -->
+       <!-- Navbar Start -->
     <div class="container-fluid position-relative nav-bar p-0">
         <div class="position-relative px-lg-5" style="z-index: 9;">
             <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
@@ -222,10 +222,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <script>
 function cargarCajon() {
-    fetch("http://localhost:9090/cajon/")
+    fetch("http://18.117.135.191:9090/cajon/")
         .then(response => response.json())
         .then(cajones => {
-            fetch("http://localhost:9090/servicio/")
+            fetch("http://18.117.135.191:9090/servicio/")
                 .then(response => response.json())
                 .then(servicios => {
                     var tabla = document.getElementById("tablaCobros").getElementsByTagName('tbody')[0];
@@ -309,7 +309,7 @@ document.addEventListener("DOMContentLoaded", cargarCajon);
         };
 
         // Enviar los datos al servidor
-        fetch("http://localhost:9090/cajon/", {
+        fetch("http://18.117.135.191:9090/cajon/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(datos)
@@ -375,7 +375,7 @@ document.addEventListener("DOMContentLoaded", cargarCajon);
         };
 
         // Enviar los datos al servidor
-        fetch(`http://localhost:9090/cajon/${id_Cajon}`, {
+        fetch(`http://18.117.135.191:9090/cajon/${id_Cajon}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(datos)

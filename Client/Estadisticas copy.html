@@ -63,7 +63,7 @@
 
 
 
-   <!-- Navbar Start -->
+     <!-- Navbar Start -->
     <div class="container-fluid position-relative nav-bar p-0">
         <div class="position-relative px-lg-5" style="z-index: 9;">
             <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
@@ -115,7 +115,7 @@
 
     <script>
         function generarGrafica() {
-            fetch("http://localhost:9090/pago")
+            fetch("http://18.117.135.191:9090/pago")
                 .then(response => response.json())
                 .then(data => {
                     let conteoPagos = { Efectivo: 0, Tarjeta: 0, Transferencia: 0 };
@@ -170,7 +170,7 @@
 
     <script>
         function generarGraficaPagosHoras() {
-            fetch("http://localhost:9090/pago")
+            fetch("http://18.117.135.191:9090/pago")
                 .then(response => response.json())
                 .then(data => {
                     let pagosPorHora = {}; // Objeto para contar pagos por hora
@@ -233,7 +233,7 @@
 
     <script>
         function generarGraficaDispersion() {
-            fetch("http://localhost:9090/pago")
+            fetch("http://18.117.135.191:9090/pago")
                 .then(response => response.json())
                 .then(data => {
                     let puntosPago = []; // Lista de puntos para la gráfica de dispersión
@@ -296,7 +296,7 @@
 
     <script>
         function generarGraficaDuracion() {
-            fetch("http://localhost:9090/servicio/")
+            fetch("http://18.117.135.191:9090/servicio/")
                 .then(response => response.json())
                 .then(data => {
                     let duracionPorCajon = {}; // Almacenar duración por cajón
@@ -368,7 +368,7 @@
 
     <script>
         function generarGraficaFluctuacion() {
-            fetch("http://localhost:9090/servicio/")
+            fetch("http://18.117.135.191:9090/servicio/")
                 .then(response => response.json())
                 .then(data => {
                     let entradasPorHora = {}; // Cantidad de entradas por hora
@@ -454,7 +454,7 @@
 
     <script>
         function generarGraficaCajones() {
-            fetch("http://localhost:9090/servicio/")
+            fetch("http://18.117.135.191:9090/servicio/")
                 .then(response => response.json())
                 .then(data => {
                     let usoCajones = {}; // Objeto para contar el uso de cada cajón
@@ -551,10 +551,10 @@
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF({ orientation: 'landscape' });
 
-                const pagosResponse = await fetch('http://localhost:9090/pago/');
+                const pagosResponse = await fetch('http://18.117.135.191:9090/pago/');
                 const pagosData = await pagosResponse.json();
 
-                const serviciosResponse = await fetch('http://localhost:9090/servicio/');
+                const serviciosResponse = await fetch('http://18.117.135.191:9090/servicio/');
                 const serviciosData = await serviciosResponse.json();
 
                 const serviciosMap = new Map();

@@ -31,6 +31,7 @@
 
 <body>
    
+   
 <!-- Navbar Start -->
     <div class="container-fluid position-relative nav-bar p-0">
         <div class="position-relative px-lg-5" style="z-index: 9;">
@@ -176,7 +177,7 @@
 async function consultarYEnviarCliente() {
     try {
         // 1. Consultar los datos del último cliente
-        const response = await fetch("http://localhost:9090/cliente");
+        const response = await fetch("http://18.117.135.191:9090/cliente");
         if (!response.ok) throw new Error("Error al obtener los datos del cliente");
 
         const clientes = await response.json();
@@ -379,7 +380,7 @@ document.getElementById("AgregarCliente").addEventListener("submit", function (e
         Tipo: document.getElementById("TipoA").value
     };
 
-    fetch("http://localhost:9090/cliente/", {
+    fetch("http://18.117.135.191:9090/cliente/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datos)
@@ -403,7 +404,7 @@ document.getElementById("AgregarCliente").addEventListener("submit", function (e
         const id_cliente = document.getElementById("id_cliente").value;
        
 
-        fetch(`http://localhost:9090/cliente/${id_cliente}`, {
+        fetch(`http://18.117.135.191:9090/cliente/${id_cliente}`, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" }
         })
@@ -419,7 +420,7 @@ document.getElementById("AgregarCliente").addEventListener("submit", function (e
 //formulario actualizar
 
 function cargarClienteId(idcliente) {
-    fetch(`http://localhost:9090/cliente/${idcliente}`)
+    fetch(`http://18.117.135.191:9090/cliente/${idcliente}`)
         .then(response => {
             if (!response.ok) throw new Error("Cliente no encontrado");
             return response.json();
@@ -449,7 +450,7 @@ function cargarClienteId(idcliente) {
         const Tipo = document.getElementById("tipoAC").value ;
 
 
-            fetch("http://localhost:9090/cliente/", {
+            fetch("http://18.117.135.191:9090/cliente/", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ id_cliente, Nombre, Telefono, Placa, Marca, Color, Tipo })
@@ -511,7 +512,7 @@ function cargarClienteId(idcliente) {
 
 <script>
 function cargarCliente() {
-    fetch("http://localhost:9090/cliente/")
+    fetch("http://18.117.135.191:9090/cliente/")
         .then(response => response.json()) // Convertir la respuesta a JSON
         .then(data => {
             var tabla = document.getElementById("tablaCobros").getElementsByTagName('tbody')[0];
