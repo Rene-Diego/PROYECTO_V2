@@ -35,9 +35,11 @@
     <div class="container-fluid position-relative nav-bar p-0">
         <div class="position-relative px-lg-5" style="z-index: 9;">
             <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-                <a href="" class="navbar-brand">
-                    <h1 class="text-uppercase text-primary mb-1">Estacionamiento Luigi</h1>
-                </a>
+                                   <a href="" class="navbar-brand">
+    <h1 class="text-uppercase text-primary mb-1" style="background: url('img/luigi.png') no-repeat left center; background-size: contain; padding-left: 50px;">
+        Estacionamiento Luigi
+    </h1>
+</a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -189,7 +191,9 @@ async function consultarYEnviarCliente() {
         if (!numeroDestino) throw new Error("No se encontró un número de teléfono válido");
 
         // 2. Crear mensaje con datos del cliente
-        const mensaje = `*Detalles del Cliente:*\n`
+        const mensaje = `*ESTACIONAMIENTO LUIGI*\n
+*"El lugar más seguro donde dejar tu auto"*\n
+        *Detalles del Cliente:*\n`
             + `- ID Cliente: ${ultimoCliente.id_cliente || "No disponible"}\n`
             + `- Nombre: ${ultimoCliente.Nombre || "No disponible"}\n`
             + `- Teléfono: ${ultimoCliente.Telefono || "No disponible"}`;

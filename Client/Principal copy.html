@@ -45,13 +45,17 @@
     }
 </style>
 
-    <!-- Navbar Start -->
+
+
+   <!-- Navbar Start -->
     <div class="container-fluid position-relative nav-bar p-0">
         <div class="position-relative px-lg-5" style="z-index: 9;">
             <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-                <a href="" class="navbar-brand">
-                    <h1 class="text-uppercase text-primary mb-1">Estacionamiento Luigi</h1>
-                </a>
+                                   <a href="" class="navbar-brand">
+    <h1 class="text-uppercase text-primary mb-1" style="background: url('img/luigi.png') no-repeat left center; background-size: contain; padding-left: 50px;">
+        Estacionamiento Luigi
+    </h1>
+</a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -69,8 +73,6 @@
         </div>
     </div>
     <!-- Navbar End -->
-
-
 
 
    <!-- opciones Start -->
@@ -266,7 +268,10 @@
 
                 // 3 Generar mensaje con los datos del pago
                 const mensaje = `
- *Detalles del Pago*:
+
+*ESTACIONAMIENTO LUIGI*\n
+*"El lugar más seguro donde dejar tu auto"*\n
+ *Detalles del Pago*:\n
 - ID Pago: ${ultimoPago.id_pago}
 - ID Estacionamiento: ${ultimoPago.id_Estacionamiento}
 - Cantidad: ${ultimoPago.cantidad} MXN
@@ -365,7 +370,9 @@ document.querySelector("button[type='submit']").addEventListener("click", async 
 
         // Generar el mensaje con los datos del servicio
         const mensaje = `
-Detalles del Servicio:
+        *ESTACIONAMIENTO LUIGI*\n
+*"El lugar más seguro donde dejar tu auto"*\n
+Detalles del Servicio:\n
 - Número de Servicio: ${ultimoRegistro.id_Estacionamiento}
 - ID Auto: ${ultimoRegistro.id_Auto}
 - ID Cajón: ${ultimoRegistro.id_Cajon}
@@ -468,7 +475,7 @@ async function buscarServicio() {
 
     try {
         // Enviar el ID y la hora al servidor con PUT
-        const putResponse = await fetch(`http://localhost:9090/servicio/`, {
+        const putResponse = await fetch(`http://18.117.135.191:9090/servicio/`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -486,7 +493,7 @@ async function buscarServicio() {
         }
 
         // Ahora realizar la búsqueda del servicio
-        const response = await fetch(`http://localhost:9090/servicio/${id_Estacionamiento}`);
+        const response = await fetch(`http://18.117.135.191:9090/servicio/${id_Estacionamiento}`);
         const data = await response.json();
 
         if (!response.ok) {
@@ -686,7 +693,7 @@ function calcularPago() {
 }
     //formulario de cliente registrado 
         function cargarCajonCR() {
-    fetch("http://localhost:9090/cajon/")
+    fetch("http://18.117.135.191:9090/cajon/")
         .then(response => response.json()) // Convertir la respuesta a JSON
         .then(data => {
             var selectCajon = document.getElementById("cajonSelectCR");
@@ -711,7 +718,7 @@ document.addEventListener("DOMContentLoaded", cargarCajonCR);
 
 //formulario de cliente no registrado
     function cargarCajon() {
-    fetch("http://localhost:9090/cajon/")
+    fetch("http://18.117.135.191:9090/cajon/")
         .then(response => response.json()) // Convertir la respuesta a JSON
         .then(data => {
             var selectCajon = document.getElementById("cajonSelect");
@@ -771,7 +778,7 @@ document.getElementById("registrarBtn").addEventListener("click", function () {
     };
 
     // Enviar solicitud POST para registrar el servicio
-    fetch("http://localhost:9090/servicio", {
+    fetch("http://18.117.135.191:9090/servicio", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datosServicio)
@@ -781,7 +788,7 @@ document.getElementById("registrarBtn").addEventListener("click", function () {
         alert("Servicio registrado correctamente.");
         resetearCasillas();
 
-        return fetch("http://localhost:9090/cajon/", {
+        return fetch("http://18.117.135.191:9090/cajon/", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id_Cajon, Estado: "Ocupado" })
@@ -803,7 +810,10 @@ document.getElementById("registrarBtn").addEventListener("click", function () {
         const ultimoRegistro = servicioData[servicioData.length - 1];
 
         const mensaje = `
-Detalles del Servicio:
+        *ESTACIONAMIENTO LUIGI*\n
+*"El lugar más seguro donde dejar tu auto"*\n\n
+
+*Detalles del Servicio:*\n
 - Número de Servicio: ${ultimoRegistro.id_Estacionamiento}
 - ID Auto: ${ultimoRegistro.id_Auto}
 - ID Cajón: ${ultimoRegistro.id_Cajon}
