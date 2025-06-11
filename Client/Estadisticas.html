@@ -546,7 +546,7 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 
-        <script>
+ <script>
         async function generatePDFTabla() {
             try {
                 const { jsPDF } = window.jspdf;
@@ -576,7 +576,7 @@
 
                 let headers = [
                     ['ID Pago', 'ID Estacionamiento', 'Cantidad', 'Tipo Pago', 
-                     'ID Auto', 'ID Cajón', 'Hora Entrada', 'Hora Salida']
+                     'ID Auto', 'ID Cajón', 'Fecha', 'Hora Entrada', 'Hora Salida']
                 ];
                 
                 let rows = pagosData.map(pago => {
@@ -589,6 +589,7 @@
                         pago.Tipo_Pago, 
                         servicio.id_Auto || 'N/A', 
                         servicio.id_Cajon || 'N/A', 
+                        servicio.Fecha || 'N/A', 
                         servicio.Hora_Entrada || 'N/A', 
                         servicio.Hora_Salida || 'N/A'
                     ];
