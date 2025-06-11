@@ -31,7 +31,7 @@
 
 <body>
    
-   <!-- Navbar Start -->
+<!-- Navbar Start -->
     <div class="container-fluid position-relative nav-bar p-0">
         <div class="position-relative px-lg-5" style="z-index: 9;">
             <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
@@ -163,34 +163,53 @@
                             </div>
                             <div class="form-group">
                             <div>
-                                <button class="btn btn-primary btn-block font-weight-bold py-3"  id="enviarWhatsApp" type="submit">Agregar</button>
+                                <button class="btn btn-primary btn-block font-weight-bold py-3" id="enviarWhatsApp" type="submit">Agregar</button>
                             </div>
                         </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                         
+       
 
 <script>
-document.getElementById("enviarWhatsApp").onclick = function() {
-    const id_cliente = 58;
-    const nombre = "rene";
-    const telefono = document.getElementById("TelefonoC").value;
+async function consultarYEnviarCliente() {
+    try {
+        // 1. Consultar los datos del último cliente
+        const response = await fetch("http://localhost:9090/cliente");
+        if (!response.ok) throw new Error("Error al obtener los datos del cliente");
 
-    if (!telefono) {
-        alert("Por favor, ingresa un número de teléfono.");
-        return;
+        const clientes = await response.json();
+        if (!clientes || clientes.length === 0) throw new Error("No hay clientes registrados");
+
+        const ultimoCliente = clientes[clientes.length - 1]; // Último registro
+        const numeroDestino = `+52${ultimoCliente.Telefono?.trim()}`; // Agrega +52 y limpia espacios
+
+        if (!numeroDestino) throw new Error("No se encontró un número de teléfono válido");
+
+        // 2. Crear mensaje con datos del cliente
+        const mensaje = `*Detalles del Cliente:*\n`
+            + `- ID Cliente: ${ultimoCliente.id_cliente || "No disponible"}\n`
+            + `- Nombre: ${ultimoCliente.Nombre || "No disponible"}\n`
+            + `- Teléfono: ${ultimoCliente.Telefono || "No disponible"}`;
+
+        // 3. Generar el enlace de WhatsApp Web con el número y mensaje
+        const url = `https://web.whatsapp.com/send?phone=${numeroDestino}&text=${encodeURIComponent(mensaje)}`;
+
+        // 4. Abrir WhatsApp Web con el mensaje predefinido
+        window.open(url, "_blank");
+
+        alert(`Mensaje enviado a WhatsApp con éxito al número ${numeroDestino}`);
+    } catch (error) {
+        console.error("Error:", error);
+        alert(`Hubo un problema al procesar la solicitud: ${error.message}`);
     }
-
-    const mensaje = `Registro de cliente:\nID Cliente: ${id_cliente}\nNombre: ${nombre}\nTeléfono: ${telefono}`;
-    const whatsappWebUrl = `https://web.whatsapp.com/send?text=${encodeURIComponent(mensaje)}`;
-
-    window.open(whatsappWebUrl, "_blank");
-};
-
+}
 </script>
 
+
+
+                           
                 <div class="col-12">
                                         <!-- Formulario eliminar -->
                     <div class="container-fluid py-5" id="FormularioEliminarCliente" style="display: none;">
@@ -369,52 +388,13 @@ document.getElementById("AgregarCliente").addEventListener("submit", function (e
     .then(data => {
         alert(data.mensaje || "Cliente registrado correctamente");
         document.getElementById("AgregarCliente").reset();
-        generarPDFCliente();
+        consultarYEnviarCliente();
     })
     .catch(error => alert("Hubo un problema al registrar el cliente."));
 });
 
 
-          async function generarPDFCliente() {
-            try {
-                const response = await fetch("http://localhost:9090/cliente/");
-                if (!response.ok) {
-                    throw new Error("Error al obtener los datos");
-                }
-                const data = await response.json();
-                const ultimoRegistro = data[data.length - 1]; // Asumiendo que el último es el último en el array
-
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-                
-                doc.text("Datos del Cliente", 10, 10);
-                doc.text(`ID Cliente: ${ultimoRegistro.id_cliente}`, 10, 20);
-                doc.text(`Nombre: ${ultimoRegistro.Nombre}`, 10, 30);
-                doc.text(`Teléfono: ${ultimoRegistro.Telefono}`, 10, 40);
-                
-
-                doc.text("Autos Asociados:", 10, 70);
-                if (ultimoRegistro.autos && ultimoRegistro.autos.length > 0) {
-                    let y = 80;
-                    ultimoRegistro.autos.forEach(auto => {
-                        doc.text(`ID Auto: ${auto.id_Auto}`, 10, y);
-                        doc.text(`Placa: ${auto.Placa}`, 10, y + 10);
-                        doc.text(`Marca: ${auto.Marca}`, 10, y + 20);
-                        doc.text(`Color: ${auto.Color}`, 10, y + 30);
-                        doc.text(`Tipo: ${auto.Tipo}`, 10, y + 40);
-                        y += 50;
-                    });
-                } else {
-                    doc.text("No hay autos registrados.", 10, 80);
-                }
-
-                doc.save("cliente.pdf");
-                alert("PDF generado con éxito");
-            } catch (error) {
-                console.error("Error:", error);
-                alert("Hubo un problema al generar el PDF");
-            }
-        }
+          
 //Formulario eliminar cliente
 
 

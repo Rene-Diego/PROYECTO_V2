@@ -164,7 +164,7 @@
                             </div>
                             <div class="form-group">
                             <div>
-                                <button class="btn btn-primary btn-block font-weight-bold py-3" onclick="consultarYEnviarCliente()" id="enviarWhatsApp" type="submit">Agregar</button>
+                                <button class="btn btn-primary btn-block font-weight-bold py-3" id="enviarWhatsApp" type="submit">Agregar</button>
                             </div>
                         </form>
                             </div>
@@ -389,7 +389,7 @@ document.getElementById("AgregarCliente").addEventListener("submit", function (e
     .then(data => {
         alert(data.mensaje || "Cliente registrado correctamente");
         document.getElementById("AgregarCliente").reset();
-        
+        consultarYEnviarCliente();
     })
     .catch(error => alert("Hubo un problema al registrar el cliente."));
 });
