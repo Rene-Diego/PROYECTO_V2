@@ -80,7 +80,7 @@
 
                         <a href="Principal copy.html" class="nav-item nav-link ">Inicio</a>
                         <a href="Cliente copy.html" class="nav-item nav-link">Cliente</a>
-                        <a href="Usuarios copy.html" class="nav-item nav-link">Usuarios</a>
+                       
                         <a href="Estadisticas copy.html" class="nav-item nav-link active">Estadisticas</a>
                         <a href="servicios copy.html" class="nav-item nav-link">Servicios</a>
                         <a href="index.html" class="nav-item nav-link">Cerrar sesión</a>      
@@ -549,32 +549,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 
  <script>
-       async function generatePDFTabla() {
+async function generatePDFTabla() {
     try {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF({ orientation: 'landscape' });
         doc.setFont("times"); // Establecer Times New Roman como fuente
 
-        // Cargar imagen y agregarla en la esquina superior izquierda
-        const img = new Image();
-        img.src = "img/Luigi.png";
-        img.onload = function() {
-            doc.addImage(img, "PNG", 10, 10, 30, 30); // Imagen en la esquina superior izquierda
-            
-            // Centrar título principal
-            doc.setFontSize(18);
-            doc.text("ESTACIONAMIENTO LUIGI", doc.internal.pageSize.width / 2, 20, { align: "center" });
+        // Centrar título principal
+        doc.setFontSize(18);
+        doc.text("ESTACIONAMIENTO LUIGI", doc.internal.pageSize.width / 2, 20, { align: "center" });
 
-            // Centrar subtítulo
-            doc.setFontSize(14);
-            doc.text("\"El lugar más seguro donde dejar tu auto\"", doc.internal.pageSize.width / 2, 30, { align: "center" });
+        // Centrar subtítulo
+        doc.setFontSize(14);
+        doc.text("\"El lugar más seguro donde dejar tu auto\"", doc.internal.pageSize.width / 2, 30, { align: "center" });
 
-            // Centrar nuevo subtítulo
-            doc.setFontSize(16);
-            doc.text("Reporte general de Entradas y Egresos", doc.internal.pageSize.width / 2, 50, { align: "center" });
+        // Centrar nuevo subtítulo
+        doc.setFontSize(16);
+        doc.text("Reporte general de Entradas y Egresos", doc.internal.pageSize.width / 2, 50, { align: "center" });
 
-            generateData(doc); // Llamar función para agregar datos después de la imagen
-        };
+        generateData(doc); // Llamar función para agregar datos después del encabezado
     } catch (error) {
         console.error("Error al generar el PDF:", error);
     }
@@ -647,7 +640,7 @@ async function generateData(doc) {
         });
 
         // Guardar el PDF
-        doc.save("Reporte general de Entradas y Egresos.pdf");
+        doc.save("Pagos_Servicios.pdf");
     } catch (error) {
         console.error("Error al generar datos:", error);
     }
@@ -655,84 +648,77 @@ async function generateData(doc) {
     </script>
         
     <script>
-        document.getElementById("generarPdf").addEventListener("click", function() {
+    document.getElementById("generarPdf").addEventListener("click", function() {
     setTimeout(() => {
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
         pdf.setFont("times"); // Establecer Times New Roman como fuente
         pdf.setFontSize(18);
 
-        // Cargar imagen
-        const img = new Image();
-        img.src = "img/Luigi.png";
-        img.onload = function() {
-            pdf.addImage(img, "PNG", 10, 10, 30, 30); // Imagen en la esquina superior izquierda
+        // Centrar título principal
+        pdf.text("ESTACIONAMIENTO LUIGI", pdf.internal.pageSize.width / 2, 20, { align: "center" });
 
-            // Centrar título principal
-            pdf.text("ESTACIONAMIENTO LUIGI", pdf.internal.pageSize.width / 2, 20, { align: "center" });
+        // Centrar subtítulo
+        pdf.setFontSize(14);
+        pdf.text("\"El lugar más seguro donde dejar tu auto\"", pdf.internal.pageSize.width / 2, 30, { align: "center" });
 
-            // Centrar subtítulo
-            pdf.setFontSize(14);
-            pdf.text("\"El lugar más seguro donde dejar tu auto\"", pdf.internal.pageSize.width / 2, 30, { align: "center" });
+        // Centrar título de reporte
+        pdf.setFontSize(16);
+        pdf.text("Reporte de estadísticas gráficas", pdf.internal.pageSize.width / 2, 50, { align: "center" });
 
-            // Centrar título de reporte
-            pdf.setFontSize(16);
-            pdf.text("Reporte de estadísticas gráficas", pdf.internal.pageSize.width / 2, 50, { align: "center" });
+        let yOffset = 70; 
+        let xOffset = 10; 
 
-            let yOffset = 70; 
-            let xOffset = 10; 
+        const graficas = [
+            { id: "graficoPagos", titulo: "Distribución de Pagos", descripcion: "Métodos de pago utilizados." },
+            { id: "graficoPagosHoras", titulo: "Pagos por Hora", descripcion: "Horario con más transacciones." },
+            { id: "graficoDispersion", titulo: "Dispersión de Pagos", descripcion: "Relación entre monto y hora." },
+            { id: "graficoDuracion", titulo: "Duración de Estacionamiento", descripcion: "Tiempo de permanencia en cada cajón." },
+            { id: "graficoFluctuacion", titulo: "Fluctuación de Entradas y Salidas", descripcion: "Horas de mayor ingreso y salida." },
+            { id: "graficoCajones", titulo: "Uso de Cajones", descripcion: "Cajones más utilizados." }
+        ];
 
-            const graficas = [
-                { id: "graficoPagos", titulo: "Distribución de Pagos", descripcion: "Métodos de pago utilizados." },
-                { id: "graficoPagosHoras", titulo: "Pagos por Hora", descripcion: "Horario con más transacciones." },
-                { id: "graficoDispersion", titulo: "Dispersión de Pagos", descripcion: "Relación entre monto y hora." },
-                { id: "graficoDuracion", titulo: "Duración de Estacionamiento", descripcion: "Tiempo de permanencia en cada cajón." },
-                { id: "graficoFluctuacion", titulo: "Fluctuación de Entradas y Salidas", descripcion: "Horas de mayor ingreso y salida." },
-                { id: "graficoCajones", titulo: "Uso de Cajones", descripcion: "Cajones más utilizados." }
-            ];
+        function agregarImagen(canvas, titulo, descripcion, callback) {
+            html2canvas(canvas).then(canvasImg => {
+                const imgData = canvasImg.toDataURL("image/png");
 
-            function agregarImagen(canvas, titulo, descripcion, callback) {
-                html2canvas(canvas).then(canvasImg => {
-                    const imgData = canvasImg.toDataURL("image/png");
-
-                    if (xOffset > 100) {
-                        xOffset = 10;
-                        yOffset += 70;
-                    }
-
-                    pdf.setFontSize(12);
-                    pdf.text(titulo, xOffset, yOffset);
-                    pdf.addImage(imgData, "PNG", xOffset, yOffset + 10, 80, 50);
-                    pdf.text(descripcion, xOffset + 85, yOffset + 35);
-
-                    xOffset += 100;
-                    callback();
-                });
-            }
-
-            function procesarGraficas(index) {
-                if (index >= graficas.length) {
-                    pdf.save("Reporte de estadísticas gráficas.pdf");
-                    return;
-                }
-
-                if (index === 3) { 
-                    pdf.addPage(); 
-                    yOffset = 20; 
+                if (xOffset > 100) {
                     xOffset = 10;
+                    yOffset += 70;
                 }
 
-                const grafica = graficas[index];
-                const canvas = document.getElementById(grafica.id);
-                if (canvas) {
-                    agregarImagen(canvas, grafica.titulo, grafica.descripcion, () => procesarGraficas(index + 1));
-                } else {
-                    procesarGraficas(index + 1);
-                }
+                pdf.setFontSize(12);
+                pdf.text(titulo, xOffset, yOffset);
+                pdf.addImage(imgData, "PNG", xOffset, yOffset + 10, 80, 50);
+                pdf.text(descripcion, xOffset + 85, yOffset + 35);
+
+                xOffset += 100;
+                callback();
+            });
+        }
+
+        function procesarGraficas(index) {
+            if (index >= graficas.length) {
+                pdf.save("Reporte_Graficas.pdf");
+                return;
             }
 
-            procesarGraficas(0);
-        };
+            if (index === 3) { 
+                pdf.addPage(); 
+                yOffset = 20; 
+                xOffset = 10;
+            }
+
+            const grafica = graficas[index];
+            const canvas = document.getElementById(grafica.id);
+            if (canvas) {
+                agregarImagen(canvas, grafica.titulo, grafica.descripcion, () => procesarGraficas(index + 1));
+            } else {
+                procesarGraficas(index + 1);
+            }
+        }
+
+        procesarGraficas(0);
     }, 500);
 });
     </script>
