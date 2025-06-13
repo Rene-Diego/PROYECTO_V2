@@ -100,7 +100,7 @@
 
 <script>
     function cargarUsuarios() {
-        fetch("http://18.117.135.191:9090/usuario/")
+        fetch("https://18.117.135.191:9090/usuario/")
             .then(response => response.json()) // Convertir la respuesta a JSON
             .then(data => {
                 var tabla = document.getElementById("tablaCobros").getElementsByTagName('tbody')[0];
@@ -296,7 +296,7 @@
     }
 
     function cargarUsuarioId(idUsuario) {
-        fetch(`http://18.117.135.191:9090/usuario/${idUsuario}`)
+        fetch(`https://18.117.135.191:9090/usuario/${idUsuario}`)
             .then(response => {
                 if (!response.ok) throw new Error("Usuario no encontrado");
                 return response.json();
@@ -322,7 +322,7 @@
         const Password = document.getElementById("passwordU").value;
 
         if (["Admin", "Cliente", "Empleado"].includes(Tipo_Usuario)) {
-            fetch("http://18.117.135.191:9090/usuario/", {
+            fetch("https://18.117.135.191:9090/usuario/", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ id_usuario, Nick, Correo, Tipo_Usuario, Password })
@@ -354,7 +354,7 @@
         Password: password // Contraseña validada
     };
 
-    fetch("http://18.117.135.191:9090/usuario/", {
+    fetch("https://18.117.135.191:9090/usuario/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datos)
@@ -372,7 +372,7 @@
         const id_usuario = document.getElementById("id_usuario").value;
         const Nick = document.getElementById("Nick").value;
 
-        fetch(`http://18.117.135.191:9090/usuario/${id_usuario}/${Nick}`, {
+        fetch(`https://18.117.135.191:9090/usuario/${id_usuario}/${Nick}`, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" }
         })

@@ -246,7 +246,7 @@
 
             try {
                 //  Consulta los datos del cliente
-                const responseCliente = await fetch(`http://18.117.135.191:9090/cliente/${idCliente}`);
+                const responseCliente = await fetch(`https://18.117.135.191:9090/cliente/${idCliente}`);
                 if (!responseCliente.ok) throw new Error("Error al obtener datos del cliente");
 
                 const clienteData = await responseCliente.json();
@@ -255,7 +255,7 @@
                 if (!numeroDestino) throw new Error("No se encontró un número de teléfono válido");
 
                 //  Consulta los datos del último pago
-                const responsePago = await fetch("http://18.117.135.191:9090/pago/");
+                const responsePago = await fetch("https://18.117.135.191:9090/pago/");
                 if (!responsePago.ok) throw new Error("Error al obtener datos de pago");
 
                 const pagosData = await responsePago.json();
@@ -308,7 +308,7 @@ document.querySelector("button[type='submit']").addEventListener("click", async 
 
     try {
         // Consulta el servidor para obtener SOLO el id_auto y el teléfono
-        const response = await fetch(`http://18.117.135.191:9090/cliente/${id_Cliente}`);
+        const response = await fetch(`https://18.117.135.191:9090/cliente/${id_Cliente}`);
         if (!response.ok) throw new Error("Error en la consulta");
 
         const clienteData = await response.json();
@@ -331,7 +331,7 @@ document.querySelector("button[type='submit']").addEventListener("click", async 
             Fecha: fecha
         };
 
-        const postResponse = await fetch(`http://18.117.135.191:9090/servicio/${idAuto}`, {
+        const postResponse = await fetch(`https://18.117.135.191:9090/servicio/${idAuto}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(postData)
@@ -346,7 +346,7 @@ document.querySelector("button[type='submit']").addEventListener("click", async 
         document.getElementById("cajonSelectCR").value = "";
 
         // 🔹 Actualizar el estado del cajón a "Ocupado" después del registro exitoso
-        const putResponse = await fetch("http://18.117.135.191:9090/cajon/", {
+        const putResponse = await fetch("https://18.117.135.191:9090/cajon/", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id_Cajon: idCajon, Estado: "Ocupado" })
@@ -358,7 +358,7 @@ document.querySelector("button[type='submit']").addEventListener("click", async 
         cargarCajon();
 
         // Ahora, realizar la consulta de servicio y enviar el mensaje de WhatsApp
-        const responseServicio = await fetch("http://18.117.135.191:9090/servicio/");
+        const responseServicio = await fetch("https://18.117.135.191:9090/servicio/");
         if (!responseServicio.ok) throw new Error("Error al obtener los datos");
 
         const servicioData = await responseServicio.json();
@@ -475,7 +475,7 @@ async function buscarServicio() {
 
     try {
         // Enviar el ID y la hora al servidor con PUT
-        const putResponse = await fetch(`http://18.117.135.191:9090/servicio/`, {
+        const putResponse = await fetch(`https://18.117.135.191:9090/servicio/`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -493,7 +493,7 @@ async function buscarServicio() {
         }
 
         // Ahora realizar la búsqueda del servicio
-        const response = await fetch(`http://18.117.135.191:9090/servicio/${id_Estacionamiento}`);
+        const response = await fetch(`https://18.117.135.191:9090/servicio/${id_Estacionamiento}`);
         const data = await response.json();
 
         if (!response.ok) {
@@ -587,7 +587,7 @@ function calcularPago() {
 
     try {
         // Realizar la solicitud POST al servidor
-        const response = await fetch("http://18.117.135.191:9090/pago/", {
+        const response = await fetch("https://18.117.135.191:9090/pago/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -661,7 +661,7 @@ function calcularPago() {
         const id_Estacionamiento = document.getElementById("id_Estacionamiento").value;
 
         // Realizar la búsqueda del servicio
-        const response = await fetch(`http://18.117.135.191:9090/servicio/${id_Estacionamiento}`);
+        const response = await fetch(`https://18.117.135.191:9090/servicio/${id_Estacionamiento}`);
         const data = await response.json();
 
         if (!response.ok) {
@@ -679,7 +679,7 @@ function calcularPago() {
         }
 
         // 🔹 Actualizar el estado del cajón a "Disponible"
-        const putResponse = await fetch("http://18.117.135.191:9090/cajon/", {
+        const putResponse = await fetch("https://18.117.135.191:9090/cajon/", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id_Cajon, Estado: "Disponible" })
@@ -693,7 +693,7 @@ function calcularPago() {
 }
     //formulario de cliente registrado 
         function cargarCajonCR() {
-    fetch("http://18.117.135.191:9090/cajon/")
+    fetch("https://18.117.135.191:9090/cajon/")
         .then(response => response.json()) // Convertir la respuesta a JSON
         .then(data => {
             var selectCajon = document.getElementById("cajonSelectCR");
@@ -718,7 +718,7 @@ document.addEventListener("DOMContentLoaded", cargarCajonCR);
 
 //formulario de cliente no registrado
     function cargarCajon() {
-    fetch("http://18.117.135.191:9090/cajon/")
+    fetch("https://18.117.135.191:9090/cajon/")
         .then(response => response.json()) // Convertir la respuesta a JSON
         .then(data => {
             var selectCajon = document.getElementById("cajonSelect");
@@ -778,7 +778,7 @@ document.getElementById("registrarBtn").addEventListener("click", function () {
     };
 
     // Enviar solicitud POST para registrar el servicio
-    fetch("http://18.117.135.191:9090/servicio", {
+    fetch("https://18.117.135.191:9090/servicio", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datosServicio)
@@ -788,7 +788,7 @@ document.getElementById("registrarBtn").addEventListener("click", function () {
         alert("Servicio registrado correctamente.");
         resetearCasillas();
 
-        return fetch("http://18.117.135.191:9090/cajon/", {
+        return fetch("https://18.117.135.191:9090/cajon/", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id_Cajon, Estado: "Ocupado" })
@@ -799,7 +799,7 @@ document.getElementById("registrarBtn").addEventListener("click", function () {
         cargarCajonCR();
         cargarCajon();
 
-        return fetch("http://18.117.135.191:9090/servicio/");
+        return fetch("https://18.117.135.191:9090/servicio/");
     })
     .then(response => response.json())
     .then(servicioData => {

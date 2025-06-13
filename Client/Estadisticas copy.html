@@ -118,7 +118,7 @@
 
     <script>
         function generarGrafica() {
-            fetch("http://18.117.135.191:9090/pago")
+            fetch("https://18.117.135.191:9090/pago")
                 .then(response => response.json())
                 .then(data => {
                     let conteoPagos = { Efectivo: 0, Tarjeta: 0, Transferencia: 0 };
@@ -173,7 +173,7 @@
 
     <script>
         function generarGraficaPagosHoras() {
-            fetch("http://18.117.135.191:9090/pago")
+            fetch("https://18.117.135.191:9090/pago")
                 .then(response => response.json())
                 .then(data => {
                     let pagosPorHora = {}; // Objeto para contar pagos por hora
@@ -236,7 +236,7 @@
 
     <script>
         function generarGraficaDispersion() {
-            fetch("http://18.117.135.191:9090/pago")
+            fetch("https://18.117.135.191:9090/pago")
                 .then(response => response.json())
                 .then(data => {
                     let puntosPago = []; // Lista de puntos para la gráfica de dispersión
@@ -299,7 +299,7 @@
 
     <script>
         function generarGraficaDuracion() {
-            fetch("http://18.117.135.191:9090/servicio/")
+            fetch("https://18.117.135.191:9090/servicio/")
                 .then(response => response.json())
                 .then(data => {
                     let duracionPorCajon = {}; // Almacenar duración por cajón
@@ -371,7 +371,7 @@
 
     <script>
         function generarGraficaFluctuacion() {
-            fetch("http://18.117.135.191:9090/servicio/")
+            fetch("https://18.117.135.191:9090/servicio/")
                 .then(response => response.json())
                 .then(data => {
                     let entradasPorHora = {}; // Cantidad de entradas por hora
@@ -457,7 +457,7 @@
 
     <script>
         function generarGraficaCajones() {
-            fetch("http://18.117.135.191:9090/servicio/")
+            fetch("https://18.117.135.191:9090/servicio/")
                 .then(response => response.json())
                 .then(data => {
                     let usoCajones = {}; // Objeto para contar el uso de cada cajón
@@ -575,10 +575,10 @@ async function generatePDFTabla() {
 
 async function generateData(doc) {
     try {
-        const pagosResponse = await fetch('http://18.117.135.191:9090/pago/');
+        const pagosResponse = await fetch('https://18.117.135.191:9090/pago/');
         const pagosData = await pagosResponse.json();
 
-        const serviciosResponse = await fetch('http://18.117.135.191:9090/servicio/');
+        const serviciosResponse = await fetch('https://18.117.135.191:9090/servicio/');
         const serviciosData = await serviciosResponse.json();
 
         const serviciosMap = new Map();

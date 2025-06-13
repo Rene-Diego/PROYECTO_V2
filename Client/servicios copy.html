@@ -224,10 +224,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <script>
 function cargarCajon() {
-    fetch("http://18.117.135.191:9090/cajon/")
+    fetch("https://18.117.135.191:9090/cajon/")
         .then(response => response.json())
         .then(cajones => {
-            fetch("http://18.117.135.191:9090/servicio/")
+            fetch("https://18.117.135.191:9090/servicio/")
                 .then(response => response.json())
                 .then(servicios => {
                     var tabla = document.getElementById("tablaCobros").getElementsByTagName('tbody')[0];
@@ -311,7 +311,7 @@ document.addEventListener("DOMContentLoaded", cargarCajon);
         };
 
         // Enviar los datos al servidor
-        fetch("http://18.117.135.191:9090/cajon/", {
+        fetch("https://18.117.135.191:9090/cajon/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(datos)
@@ -377,7 +377,7 @@ document.addEventListener("DOMContentLoaded", cargarCajon);
         };
 
         // Enviar los datos al servidor
-        fetch(`http://18.117.135.191:9090/cajon/${id_Cajon}`, {
+        fetch(`https://18.117.135.191:9090/cajon/${id_Cajon}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(datos)
